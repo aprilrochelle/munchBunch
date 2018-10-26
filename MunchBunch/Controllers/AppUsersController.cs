@@ -26,46 +26,42 @@ namespace MunchBunch.Controllers
         private Task<AppUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: AppUsers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+
+            var currUser = await GetCurrentUserAsync();
+
+            var usersId = currUser.Id;
 
             var userDetails = await _context.AppUser
-                .FirstOrDefaultAsync(m => m.Id == id.ToString());
+                .FindAsync(usersId);
 
             return View(userDetails);
         }
 
 
         // GET: AppUsers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var currUser = await GetCurrentUserAsync();
 
-            var appUser = await _context.AppUser.FindAsync(id);
+            var usersId = currUser.Id;
 
-            if (appUser == null)
-            {
-                return NotFound();
-            }
+            var userDetails = await _context.AppUser
+                .FindAsync(usersId);
 
-            return View(appUser);
+            return View(userDetails);
         }
 
         // POST: AppUsers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit()
         {
             try
             {
                 // TODO: Add update logic here
+
 
                 return RedirectToAction(nameof(Details));
             }

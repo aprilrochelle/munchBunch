@@ -71,8 +71,8 @@ namespace MunchBunch
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute("home", "home",
-                defaults: new { controller = "Home", action = "Index" });
+                //routes.MapRoute("home", "home",
+                //defaults: new { controller = "Home", action = "Index" });
             });
         }
     }
