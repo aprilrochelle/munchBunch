@@ -56,19 +56,22 @@ namespace MunchBunch.Controllers
         // POST: AppUsers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit()
+        public async Task<IActionResult> Edit([Bind("FirstName, LastName, PrimaryLocation")] AppUser appUser)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var currUser = await GetCurrentUserAsync();
+            var usersId = currUser.Id;
 
+            if (ModelState.IsValid)
+            {
+
+                // TODO: Add update logic here
+                _context.Update(appUser);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Details));
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction(nameof(Edit));
         }
 
     }
