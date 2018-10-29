@@ -59,13 +59,17 @@ namespace MunchBunch.Controllers
         public async Task<IActionResult> Edit([Bind("FirstName, LastName, PrimaryLocation")] AppUser appUser)
         {
             var currUser = await GetCurrentUserAsync();
-            var usersId = currUser.Id;
+            //var usersId = currUser.Id;
+            //appUser.Id = usersId;
+            currUser.FirstName = appUser.FirstName;
+            currUser.LastName = appUser.LastName;
+            currUser.PrimaryLocation = appUser.PrimaryLocation;
 
             if (ModelState.IsValid)
             {
 
                 // TODO: Add update logic here
-                _context.Update(appUser);
+                _context.Update(currUser);
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Details));
