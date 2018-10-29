@@ -27,6 +27,7 @@ namespace MunchBunch.Models
         public string FullName => $"{FirstName} {LastName}";
 
         [Required]
+        [Display(Name = "Primary City")]
         public string PrimaryLocation { get; set; }
     }
 }
