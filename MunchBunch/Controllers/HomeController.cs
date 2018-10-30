@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MunchBunch.Models;
+using Microsoft.Extensions.Options;
 
 namespace MunchBunch.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IOptions<APISettings> _apiSettings;
+
+        public HomeController(IOptions<APISettings> apiSettings){
+            _apiSettings = apiSettings;
+        }
+
+        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -41,5 +49,12 @@ namespace MunchBunch.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        //public async Task<IActionResult> Search(string searchQuery)
+        //{
+        //    List<Memoir> searchResults = new List<Memoir>();
+        //    //searchResults = fetch here?
+        //    return View(searchResults);
+        //}
     }
 }

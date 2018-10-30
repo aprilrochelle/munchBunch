@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MunchBunch.Models.Memoir>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dish)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cocktail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppUser)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cocktail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppUser.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MemoirId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MemoirId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MemoirId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
