@@ -54,7 +54,6 @@ namespace MunchBunch.Controllers
         // GET: Memoirs/Create
         public IActionResult Create()
         {
-            ViewData["AppUserId"] = new SelectList(_context.AppUser, "Id", "Id");
             return View();
         }
 
