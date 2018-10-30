@@ -15,5 +15,6 @@ namespace MunchBunch.Data
         }
 
         public DbSet<AppUser> AppUser { get; set; }
+        public DbSet<Memoir> Memoir { get; set; }
     }
 }

@@ -1,0 +1,52 @@
+﻿@model MunchBunch.Models.Memoir
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Memoir</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dish)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dish)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cocktail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cocktail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AppUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AppUser.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MemoirId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
