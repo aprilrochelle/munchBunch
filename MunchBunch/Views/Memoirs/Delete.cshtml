@@ -19,6 +19,24 @@
             @Html.DisplayFor(model => model.RId)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.RestaurantName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantLocation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantAddress)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Dish)
         </dt>
         <dd>
@@ -36,14 +54,9 @@
         <dd>
             @Html.DisplayFor(model => model.Comments)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AppUser)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AppUser.Id)
-        </dd>
+
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="MemoirId" />
         <input type="submit" value="Delete" class="btn btn-default" /> |

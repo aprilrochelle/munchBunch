@@ -24,10 +24,13 @@ namespace MunchBunch.Models
         [Required]
         public string Comments { get; set; }
 
+        [Display(Name = "Restaurant")]
         public string RestaurantName { get; set; }
 
+        [Display(Name = "Area")]
         public string RestaurantLocation { get; set; }
 
+        [Display(Name = "Address")]
         public string RestaurantAddress { get; set; }
 
         [Required]
