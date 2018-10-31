@@ -66,6 +66,7 @@ namespace MunchBunch.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(string restaurantName, int rid, string restaurantLocation, string restaurantAddress)
         {
             //get current user
@@ -87,7 +88,7 @@ namespace MunchBunch.Controllers
                 await _context.SaveChangesAsync();
 
             }
-            //ViewData["AppUserId"] = new SelectList(_context.AppUser, "Id", "Id", memoir.AppUserId);
+
             return RedirectToAction(nameof(Edit), new {
                 id = memoir.MemoirId
             });
@@ -108,7 +109,6 @@ namespace MunchBunch.Controllers
             {
                 return NotFound();
             }
-            //ViewData["AppUserId"] = new SelectList(_context.AppUser, "Id", "Id", memoir.AppUserId);
             return View(memoir);
         }
 
@@ -123,10 +123,6 @@ namespace MunchBunch.Controllers
             {
                 return NotFound();
             }
-
-            var currUser = await GetCurrentUserAsync();
-            var usersId = currUser.Id;
-            memoir.AppUserId = usersId;
 
             if (ModelState.IsValid)
             {
@@ -148,11 +144,11 @@ namespace MunchBunch.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            // ViewData["AppUserId"] = new SelectList(_context.AppUser, "Id", "Id", memoir.AppUserId);
             return View(memoir);
         }
 
         // GET: Memoirs/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -173,7 +169,8 @@ namespace MunchBunch.Controllers
 
         // POST: Memoirs/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [Authorize]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var memoir = await _context.Memoir.FindAsync(id);
