@@ -15,8 +15,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="RId" class="control-label"></label>
-                <input asp-for="RId" class="form-control" />
+                <input disabled asp-for="RId" class="form-control" />
                 <span asp-validation-for="RId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RestaurantName" class="control-label"></label>
+                <input disabled asp-for="RestaurantName" class="form-control" />
+                <span asp-validation-for="RestaurantName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RestaurantLocation" class="control-label"></label>
+                <input disabled asp-for="RestaurantLocation" class="form-control" />
+                <span asp-validation-for="RestaurantLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RestaurantAddress" class="control-label"></label>
+                <input disabled asp-for="RestaurantAddress" class="form-control" />
+                <span asp-validation-for="RestaurantAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Dish" class="control-label"></label>

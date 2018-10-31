@@ -7,9 +7,9 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<!-- <p>
+    <a asp-action="Create">Create New </a>
+</p> -->
 <table class="table">
     <thead>
         <tr>
@@ -17,14 +17,15 @@
                 @Html.DisplayNameFor(model => model.RId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dish)
+                @Html.DisplayNameFor(model => model.RestaurantName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cocktail)
+                @Html.DisplayNameFor(model => model.RestaurantLocation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Comments)
+                @Html.DisplayNameFor(model => model.RestaurantAddress)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.AppUser)
             </th>
@@ -38,16 +39,17 @@
                 @Html.DisplayFor(modelItem => item.RId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dish)
+                @Html.DisplayFor(modelItem => item.RestaurantName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cocktail)
+                @Html.DisplayFor(modelItem => item.RestaurantLocation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Comments)
+                @Html.DisplayFor(modelItem => item.RestaurantAddress)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.AppUser.Id)
+                @Html.DisplayFor(modelItem => item.AppUser.FullName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MemoirId">Edit</a> |

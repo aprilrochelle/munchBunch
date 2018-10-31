@@ -24,13 +24,10 @@ namespace MunchBunch.Models
         [Required]
         public string Comments { get; set; }
 
-        [NotMapped]
         public string RestaurantName { get; set; }
 
-        [NotMapped]
         public string RestaurantLocation { get; set; }
 
-        [NotMapped]
         public string RestaurantAddress { get; set; }
 
         [Required]

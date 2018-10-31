@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -26,13 +27,16 @@ namespace MunchBunch.Controllers
         private Task<AppUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Memoirs
+        [Authorize]
         public async Task<IActionResult> Index()
         {
+          //filter by current user
             var applicationDbContext = _context.Memoir.Include(m => m.AppUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Memoirs/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,16 +56,17 @@ namespace MunchBunch.Controllers
         }
 
         // GET: Memoirs/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Memoirs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> Create(string restaurantName, int rid, string restLocation, string restAdd)
+        public async Task<IActionResult> Create(string restaurantName, int rid, string restaurantLocation, string restaurantAddress)
         {
             //get current user
             var currUser = await GetCurrentUserAsync();
@@ -75,25 +80,22 @@ namespace MunchBunch.Controllers
                 memoir.Comments = "";
                 memoir.AppUserId = usersId;
                 memoir.RestaurantName = restaurantName;
-                memoir.RestaurantLocation = restLocation;
-                memoir.RestaurantAddress = restAdd;
+                memoir.RestaurantLocation = restaurantLocation;
+                memoir.RestaurantAddress = restaurantAddress;
 
                 _context.Add(memoir);
                 await _context.SaveChangesAsync();
-                
+
             }
             //ViewData["AppUserId"] = new SelectList(_context.AppUser, "Id", "Id", memoir.AppUserId);
             return RedirectToAction(nameof(Edit), new {
-                id = memoir.MemoirId,
-                rName = restaurantName,
-                r_id = rid,
-                rLoc = restLocation,
-                rAdd = restAdd
+                id = memoir.MemoirId
             });
         }
 
         // GET: Memoirs/Edit/5
-        public async Task<IActionResult> Edit(int? id, int r_id, string rName, string rLoc, string rAdd)
+        [Authorize]
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -101,9 +103,7 @@ namespace MunchBunch.Controllers
             }
 
             var memoir = await _context.Memoir.FindAsync(id);
-            memoir.RestaurantName = rName;
-            memoir.RestaurantLocation = rLoc;
-            memoir.RestaurantAddress = rAdd;
+
             if (memoir == null)
             {
                 return NotFound();
@@ -113,16 +113,20 @@ namespace MunchBunch.Controllers
         }
 
         // POST: Memoirs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MemoirId,RId,Dish,Cocktail,Comments,AppUserId")] Memoir memoir)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, Memoir memoir)
         {
             if (id != memoir.MemoirId)
             {
                 return NotFound();
             }
+
+            var currUser = await GetCurrentUserAsync();
+            var usersId = currUser.Id;
+            memoir.AppUserId = usersId;
 
             if (ModelState.IsValid)
             {
@@ -144,7 +148,7 @@ namespace MunchBunch.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserId"] = new SelectList(_context.AppUser, "Id", "Id", memoir.AppUserId);
+            // ViewData["AppUserId"] = new SelectList(_context.AppUser, "Id", "Id", memoir.AppUserId);
             return View(memoir);
         }
 

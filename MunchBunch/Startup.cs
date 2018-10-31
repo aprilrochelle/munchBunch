@@ -36,7 +36,7 @@ namespace MunchBunch
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+                options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<AppUser>()
@@ -76,7 +76,7 @@ namespace MunchBunch
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-              
+
             });
         }
     }

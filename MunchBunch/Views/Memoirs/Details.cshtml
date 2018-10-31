@@ -18,6 +18,24 @@
             @Html.DisplayFor(model => model.RId)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.RestaurantName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantLocation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantAddress)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Dish)
         </dt>
         <dd>
@@ -39,7 +57,7 @@
             @Html.DisplayNameFor(model => model.AppUser)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AppUser.Id)
+            @Html.DisplayFor(model => model.AppUser.FullName)
         </dd>
     </dl>
 </div>
