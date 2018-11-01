@@ -87,7 +87,7 @@ namespace MunchBunch.Controllers
                 .Where(w => w.AppUserId == usersId).Where(w => w.RId == rid)).Count();
 
             if (memoirCheck == 0 && wishlistCheck == 0) {
-
+              //if restaurant doesn't exist in wishlist or memoir table for the user, go ahead and create the new memoir
               Wishlist myWishlist = new Wishlist();
 
               if (ModelState.IsValid)
@@ -100,12 +100,13 @@ namespace MunchBunch.Controllers
 
                   _context.Add(myWishlist);
                   await _context.SaveChangesAsync();
-
               }
               return RedirectToAction(nameof(Index));
             } else if (wishlistCheck > 0) {
+              //if the user has already saved this restaurant id in the wishlist, redirect to index
               return RedirectToAction(nameof(Index));
             } else {
+              //if the restaurant id is in the user's memoirs, redirect to memoirs index
               return RedirectToAction("Index", "Memoirs", new { area = "" });
             }
 
