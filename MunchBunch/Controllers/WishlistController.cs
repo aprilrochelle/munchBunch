@@ -73,25 +73,42 @@ namespace MunchBunch.Controllers
         public async Task<IActionResult> Create(string restaurantName, int rid, string restaurantLocation, string restaurantAddress)
         {
             //get current user
-            var currUser = await GetCurrentUserAsync();
-            var usersId = currUser.Id;
+              var currUser = await GetCurrentUserAsync();
+              var usersId = currUser.Id;
 
-            Wishlist myWishlist = new Wishlist();
+            //check to see if restaurant id exists in memoir table for this user
+            int memoirCheck = (_context.Memoir
+                .Include(m => m.AppUser)
+                .Where(m => m.AppUserId == usersId).Where(m => m.RId == rid)).Count();
 
-            if (ModelState.IsValid)
-            {
-                myWishlist.RId = rid;
-                myWishlist.AppUserId = usersId;
-                myWishlist.RestaurantName = restaurantName;
-                myWishlist.RestaurantLocation = restaurantLocation;
-                myWishlist.RestaurantAddress = restaurantAddress;
+            //check to see if restaurant id exists in wishlist table already for this user
+            int wishlistCheck = (_context.Wishlist
+                .Include(w => w.AppUser)
+                .Where(w => w.AppUserId == usersId).Where(w => w.RId == rid)).Count();
 
-                _context.Add(myWishlist);
-                await _context.SaveChangesAsync();
+            if (memoirCheck == 0 && wishlistCheck == 0) {
 
+              Wishlist myWishlist = new Wishlist();
+
+              if (ModelState.IsValid)
+              {
+                  myWishlist.RId = rid;
+                  myWishlist.AppUserId = usersId;
+                  myWishlist.RestaurantName = restaurantName;
+                  myWishlist.RestaurantLocation = restaurantLocation;
+                  myWishlist.RestaurantAddress = restaurantAddress;
+
+                  _context.Add(myWishlist);
+                  await _context.SaveChangesAsync();
+
+              }
+              return RedirectToAction(nameof(Index));
+            } else if (wishlistCheck > 0) {
+              return RedirectToAction(nameof(Index));
+            } else {
+              return RedirectToAction("Index", "Memoirs", new { area = "" });
             }
 
-            return RedirectToAction(nameof(Index));
         }
 
 
@@ -107,7 +124,7 @@ namespace MunchBunch.Controllers
             await _context.SaveChangesAsync();
 
             if (tried == "true") {
-              return RedirectToAction("Create", "Memoirs", new {
+              return RedirectToAction("CreateFromWishlist", "Memoirs", new {
                restaurantName = wishlist.RestaurantName,
                rid = wishlist.RId,
                restaurantLocation = wishlist.RestaurantLocation,

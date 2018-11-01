@@ -97,6 +97,36 @@ namespace MunchBunch.Controllers
             });
         }
 
+        // GET: Memoirs/Create
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> CreateFromWishlist(string restaurantName, int rid, string restaurantLocation, string restaurantAddress)
+        {
+            //get current user
+            var currUser = await GetCurrentUserAsync();
+            var usersId = currUser.Id;
+
+            Memoir memoir = new Memoir();
+
+            if (ModelState.IsValid)
+            {
+                memoir.RId = rid;
+                memoir.Comments = "";
+                memoir.AppUserId = usersId;
+                memoir.RestaurantName = restaurantName;
+                memoir.RestaurantLocation = restaurantLocation;
+                memoir.RestaurantAddress = restaurantAddress;
+
+                _context.Add(memoir);
+                await _context.SaveChangesAsync();
+
+            }
+
+            return RedirectToAction(nameof(Edit), new {
+                id = memoir.MemoirId
+            });
+        }
+
         // GET: Memoirs/Edit/5
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
