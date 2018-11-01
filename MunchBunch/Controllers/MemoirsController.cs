@@ -76,6 +76,56 @@ namespace MunchBunch.Controllers
             var currUser = await GetCurrentUserAsync();
             var usersId = currUser.Id;
 
+            //check to see if restaurant id exists in memoir table for this user
+            int memoirCheck = (_context.Memoir
+                .Include(m => m.AppUser)
+                .Where(m => m.AppUserId == usersId).Where(m => m.RId == rid)).Count();
+
+            //check to see if restaurant id exists in wishlist table already for this user
+            int wishlistCheck = (_context.Wishlist
+                .Include(w => w.AppUser)
+                .Where(w => w.AppUserId == usersId).Where(w => w.RId == rid)).Count();
+
+            //if restaurant doesn't exist in wishlist or memoir table for the user, go ahead and create the new memoir
+            if (memoirCheck == 0 && wishlistCheck == 0) {
+
+              Memoir memoir = new Memoir();
+
+              if (ModelState.IsValid)
+              {
+                  memoir.RId = rid;
+                  memoir.Comments = "";
+                  memoir.AppUserId = usersId;
+                  memoir.RestaurantName = restaurantName;
+                  memoir.RestaurantLocation = restaurantLocation;
+                  memoir.RestaurantAddress = restaurantAddress;
+
+                  _context.Add(memoir);
+                  await _context.SaveChangesAsync();
+              }
+
+              return RedirectToAction(nameof(Edit), new {
+                  id = memoir.MemoirId
+              });
+            } else if (memoirCheck > 0) {
+              //if the user has already saved a memoir for this restaurant id, redirect to index
+              return RedirectToAction(nameof(Index));
+            } else {
+              //if the restaurant id is in the user's wishlist, redirect to wishlist index
+              return RedirectToAction("Index", "Wishlists", new { area = "" });
+            }
+
+        }
+
+        // GET: Memoirs/Create
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> CreateFromWishlist(string restaurantName, int rid, string restaurantLocation, string restaurantAddress)
+        {
+            //get current user
+            var currUser = await GetCurrentUserAsync();
+            var usersId = currUser.Id;
+
             Memoir memoir = new Memoir();
 
             if (ModelState.IsValid)

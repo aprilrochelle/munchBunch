@@ -9,8 +9,8 @@ using MunchBunch.Data;
 namespace MunchBunch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181101150351_wishlistModel")]
-    partial class wishlistModel
+    [Migration("20181101174331_readdDatabase")]
+    partial class readdDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
