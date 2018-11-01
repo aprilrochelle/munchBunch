@@ -31,7 +31,10 @@ namespace MunchBunch.Controllers
         public async Task<IActionResult> Index()
         {
           //filter by current user
-            var applicationDbContext = _context.Memoir.Include(m => m.AppUser);
+            var currUser = await GetCurrentUserAsync();
+            var usersId = currUser.Id;
+
+            var applicationDbContext = _context.Memoir.Include(m => m.AppUser).Where(m => m.AppUserId == usersId);
             return View(await applicationDbContext.ToListAsync());
         }
 
