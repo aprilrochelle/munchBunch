@@ -94,88 +94,27 @@ namespace MunchBunch.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // // GET: Memoirs/Edit/5
-        // [Authorize]
-        // public async Task<IActionResult> Edit(int? id)
-        // {
-        //     if (id == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     var memoir = await _context.Memoir.FindAsync(id);
-
-        //     if (memoir == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return View(memoir);
-        // }
-
-        // // POST: Memoirs/Edit/5
-        // // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // [HttpPost]
-        // [Authorize]
-        // public async Task<IActionResult> Edit(int id, Memoir memoir)
-        // {
-        //     if (id != memoir.MemoirId)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     if (ModelState.IsValid)
-        //     {
-        //         try
-        //         {
-        //             _context.Update(memoir);
-        //             await _context.SaveChangesAsync();
-        //         }
-        //         catch (DbUpdateConcurrencyException)
-        //         {
-        //             if (!MemoirExists(memoir.MemoirId))
-        //             {
-        //                 return NotFound();
-        //             }
-        //             else
-        //             {
-        //                 throw;
-        //             }
-        //         }
-        //         return RedirectToAction(nameof(Index));
-        //     }
-        //     return View(memoir);
-        // }
-
-        // GET: Wishlists/Delete/5
-        [Authorize]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var wishlist = await _context.Wishlist
-                .Include(w => w.AppUser)
-                .FirstOrDefaultAsync(w => w.WishlistId == id);
-            if (wishlist == null)
-            {
-                return NotFound();
-            }
-
-            return View(wishlist);
-        }
 
         // POST: Wishlists/Delete/5
         [HttpPost, ActionName("Delete")]
         [Authorize]
 
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int wishlistid, string tried = "false")
         {
-            var wishlist = await _context.Wishlist.FindAsync(id);
+            var wishlist = await _context.Wishlist.FindAsync(wishlistid);
             _context.Wishlist.Remove(wishlist);
+
             await _context.SaveChangesAsync();
+
+            if (tried == "true") {
+              return RedirectToAction("Create", "Memoirs", new {
+               restaurantName = wishlist.RestaurantName,
+               rid = wishlist.RId,
+               restaurantLocation = wishlist.RestaurantLocation,
+               restaurantAddress = wishlist.RestaurantAddress
+                });
+            }
+
             return RedirectToAction(nameof(Index));
         }
 

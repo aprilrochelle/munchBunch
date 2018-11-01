@@ -41,7 +41,16 @@
                 @Html.DisplayFor(modelItem => item.RestaurantAddress)
             </td>
             <td>
-                <a asp-action="Delete" asp-route-id="@item.WishlistId">Delete</a>
+              <form asp-action="Delete">
+                  <input type="hidden" name="WishlistId" asp-for="@item.WishlistId" />
+                  <input type="hidden" name="tried" value="true"/>
+                  <input type="submit" value="Tried It!" class="btn btn-success" />
+              </form>
+              <form asp-action="Delete">
+                  <input type="hidden" name="WishlistId" asp-for="@item.WishlistId" />
+                  <input type="submit" value="Delete" class="btn btn-info" />
+              </form>
+
             </td>
         </tr>
 }
