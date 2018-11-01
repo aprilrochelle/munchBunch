@@ -31,7 +31,10 @@ namespace MunchBunch.Controllers
         public async Task<IActionResult> Index()
         {
           //filter by current user
-            var applicationDbContext = _context.Wishlist.Include(m => m.AppUser);
+            var currUser = await GetCurrentUserAsync();
+            var usersId = currUser.Id;
+
+            var applicationDbContext = _context.Wishlist.Include(w => w.AppUser).Where(w => w.AppUserId == usersId);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -45,8 +48,8 @@ namespace MunchBunch.Controllers
             }
 
             var wishlist = await _context.Wishlist
-                .Include(m => m.AppUser)
-                .FirstOrDefaultAsync(m => m.WishlistId == id);
+                .Include(w => w.AppUser)
+                .FirstOrDefaultAsync(w => w.WishlistId == id);
             if (wishlist == null)
             {
                 return NotFound();
@@ -154,8 +157,8 @@ namespace MunchBunch.Controllers
             }
 
             var wishlist = await _context.Wishlist
-                .Include(m => m.AppUser)
-                .FirstOrDefaultAsync(m => m.WishlistId == id);
+                .Include(w => w.AppUser)
+                .FirstOrDefaultAsync(w => w.WishlistId == id);
             if (wishlist == null)
             {
                 return NotFound();

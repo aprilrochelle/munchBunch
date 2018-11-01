@@ -11,7 +11,6 @@
         .then(res => res.json())
         .then(restaurants => {
             const select = document.querySelector("#results");
-            console.log(restaurants);
             let resultsHtml = "";
 
             restaurants.restaurants.map(restaurant => {
