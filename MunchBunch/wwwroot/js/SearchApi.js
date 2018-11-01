@@ -22,12 +22,20 @@
                     <input type="hidden" name="RestaurantLocation" value="${restaurant.restaurant.location.locality}" />
                     <input type="hidden" name="RestaurantAddress" value="${restaurant.restaurant.location.address}" />
                    <button class="ate btn-success">Ate It!</button>
-                  </form></div>`;
-  
+                  </form>
+                  <form action="http://localhost:5000/wishlists/create" method="POST">
+                    <input type="hidden" name="RId" value="${restaurant.restaurant.R.res_id}" />
+                    <input type="hidden" name="RestaurantName" value="${restaurant.restaurant.name}" />
+                    <input type="hidden" name="RestaurantLocation" value="${restaurant.restaurant.location.locality}" />
+                    <input type="hidden" name="RestaurantAddress" value="${restaurant.restaurant.location.address}" />
+                    <button class="want btn-warning">Gotta Try!</button>
+                  </form>
+                  </div>`;
+
             });
 
             select.innerHTML = resultsHtml;
-            
+
         });
 
 });
