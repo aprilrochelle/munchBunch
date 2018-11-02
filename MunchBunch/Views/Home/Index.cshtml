@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class="text-center">
+<div>
   <img class="Index" />
-  <h1 class="search-header">Search</h1>
-  <form>
+  <h1 class="search-header text-center">Search</h1>
+  <form class="text-center">
       <input id="userLoc" type="hidden" asp-for="AppUser.PrimaryLocation"/>
       <input id="searchQuery" name="searchQuery" type="text" placeholder="Search for Restaurant, Neighborhood or Cuisine" />
       <button id="searchBtn" type="submit">Search</button>
