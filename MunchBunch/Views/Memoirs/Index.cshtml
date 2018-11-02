@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MunchBunch.Models.Memoir>
+﻿@model MunchBunch.Models.MemoirViewModels.MemoirListViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -7,33 +7,29 @@
 
 <h2>Index</h2>
 
-<!-- <p>
-    <a asp-action="Create">Create New </a>
-</p> -->
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RId)
+                @Html.DisplayNameFor(model => model.Memoirs[0].RId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RestaurantName)
+                @Html.DisplayNameFor(model => model.Memoirs[0].RestaurantName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RestaurantLocation)
+                @Html.DisplayNameFor(model => model.Memoirs[0].RestaurantLocation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RestaurantAddress)
+                @Html.DisplayNameFor(model => model.Memoirs[0].RestaurantAddress)
             </th>
-
             <th>
-                @Html.DisplayNameFor(model => model.AppUser)
+                @Html.DisplayNameFor(model => model.Memoirs[0].AppUser)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Memoirs) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.RId)

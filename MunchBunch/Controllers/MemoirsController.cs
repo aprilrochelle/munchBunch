@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MunchBunch.Data;
 using MunchBunch.Models;
+using MunchBunch.Models.MemoirViewModels;
 
 namespace MunchBunch.Controllers
 {
@@ -35,7 +36,13 @@ namespace MunchBunch.Controllers
             var usersId = currUser.Id;
 
             var applicationDbContext = _context.Memoir.Include(m => m.AppUser).Where(m => m.AppUserId == usersId);
-            return View(await applicationDbContext.ToListAsync());
+            var memoirList = await applicationDbContext.ToListAsync();
+
+            MemoirListViewModel memoirListViewModel = new MemoirListViewModel() {
+              Memoirs = memoirList
+            };
+
+            return View(memoirListViewModel);
         }
 
         // GET: Memoirs/Details/5
@@ -55,13 +62,15 @@ namespace MunchBunch.Controllers
                 return NotFound();
             }
 
-            return View(memoir);
+            MemoirEditDetailDeleteViewModel memoirEditDetailDeleteViewModel = new MemoirEditDetailDeleteViewModel(memoir);
+            return View(memoirEditDetailDeleteViewModel);
         }
 
         // GET: Memoirs/Create
         [Authorize]
         public IActionResult Create()
         {
+            MemoirCreateViewModel memoirCreateViewModel = new MemoirCreateViewModel();
             return View();
         }
 
@@ -162,7 +171,8 @@ namespace MunchBunch.Controllers
             {
                 return NotFound();
             }
-            return View(memoir);
+            MemoirEditDetailDeleteViewModel memoirEditDetailDeleteViewModel = new MemoirEditDetailDeleteViewModel(memoir);
+            return View(memoirEditDetailDeleteViewModel);
         }
 
         // POST: Memoirs/Edit/5
@@ -197,7 +207,8 @@ namespace MunchBunch.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(memoir);
+            MemoirEditDetailDeleteViewModel memoirEditDetailDeleteViewModel = new MemoirEditDetailDeleteViewModel(memoir);
+            return View(memoirEditDetailDeleteViewModel);
         }
 
         // GET: Memoirs/Delete/5
@@ -216,8 +227,8 @@ namespace MunchBunch.Controllers
             {
                 return NotFound();
             }
-
-            return View(memoir);
+            MemoirEditDetailDeleteViewModel memoirEditDetailDeleteViewModel = new MemoirEditDetailDeleteViewModel(memoir);
+            return View(memoirEditDetailDeleteViewModel);
         }
 
         // POST: Memoirs/Delete/5
