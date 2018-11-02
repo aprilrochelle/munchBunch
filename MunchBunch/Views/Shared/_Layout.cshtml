@@ -19,31 +19,36 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MunchBunch</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Search</a></li>
-                    <li><a asp-area="" asp-controller="Memoirs" asp-action="Index">Munchie Memoirs</a></li>
-                    <li><a asp-area="" asp-controller="Wishlists" asp-action="Index">Wishlist</a></li>
-                </ul>
-                <partial name="_LoginPartial" />
-            </div>
-        </div>
+  <div id="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li class="sidebar-brand text-center">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <img class="logo" src="/images/MunchBunchLogo-1.png" />
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="Index">Search</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Memoirs" asp-action="Index">Munchie Memoirs</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Wishlists" asp-action="Index">Wishlist</a>
+            </li>
+            <partial name="_LoginPartial" />
+        </ul>
     </nav>
+    <!-- #sidebar-wrapper -->
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div id="page-content-wrapper" class="container body-content">
+      <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+    			<span class="hamb-middle"></span>
+				<span class="hamb-bottom"></span>
+            </button>
         @RenderBody()
         <hr />
         <footer>
@@ -82,5 +87,6 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+  </div>
 </body>
 </html>
