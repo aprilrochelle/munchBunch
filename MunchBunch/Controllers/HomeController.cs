@@ -7,37 +7,36 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MunchBunch.Models;
 using Microsoft.Extensions.Options;
+using MunchBunch.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace MunchBunch.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IOptions<APISettings> _apiSettings;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(IOptions<APISettings> apiSettings){
+        private readonly UserManager<AppUser> _userManager;
+
+        public HomeController(IOptions<APISettings> apiSettings, ApplicationDbContext context, UserManager<AppUser> userManager){
             _apiSettings = apiSettings;
+            _context = context;
+            _userManager = userManager;
         }
+
+        private Task<AppUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         [Authorize]
-        public IActionResult Index()
+         public async Task<IActionResult> Index()
         {
-            return View();
+            // get current user
+            var currUser = await GetCurrentUserAsync();
+
+            HomeViewModel homeViewModel = new HomeViewModel(currUser);
+            return View(homeViewModel);
         }
 
-        [Authorize]
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
 
         public IActionResult Privacy()
         {
@@ -50,11 +49,5 @@ namespace MunchBunch.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //public async Task<IActionResult> Search(string searchQuery)
-        //{
-        //    List<Memoir> searchResults = new List<Memoir>();
-        //    //searchResults = fetch here?
-        //    return View(searchResults);
-        //}
     }
 }

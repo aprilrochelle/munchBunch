@@ -62,7 +62,7 @@ namespace MunchBunch.Controllers
 
             currUser.FirstName = appUser.FirstName;
             currUser.LastName = appUser.LastName;
-            currUser.PrimaryLocation = appUser.PrimaryLocation;
+            currUser.PrimaryLocation = appUser.PrimaryLocation.ToUpper();
 
             if (ModelState.IsValid)
             {

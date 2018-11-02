@@ -1,9 +1,12 @@
-﻿@{
+﻿@model MunchBunch.Models.HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <h1>Search</h1>
 <form>
+    <input id="userLoc" type="hidden" asp-for="AppUser.PrimaryLocation"/>
     <input id="searchQuery" name="searchQuery" type="text" placeholder="Search for Restaurant, Neighborhood or Cuisine" />
     <button id="searchBtn" type="submit">Search</button>
 </form>

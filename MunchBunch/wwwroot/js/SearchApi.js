@@ -1,13 +1,24 @@
 ﻿$('#searchBtn').on("click", e => {
     e.preventDefault();
     const searchTerms = $('#searchQuery').val();
+    const userLocation = $('#userLoc').val();
 
-    fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=city&q=${searchTerms}`, {
-        "headers": {
-            "user-key": `${apiKey.Key}`,
-            "Content-Type": "application/json"
-        }
-    })
+    let entityId = "";
+
+    if (userLocation === "NASHVILLE") {
+      entityId = 1138;
+    } else if (userLocation === "MEMPHIS") {
+      entityId = 1144;
+    } else if (userLocation === "NEW ORLEANS") {
+      entityId = 290;
+    }
+
+      fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${entityId}&entity_type=city&q=${searchTerms}`, {
+          "headers": {
+              "user-key": `${apiKey.Key}`,
+              "Content-Type": "application/json"
+          }
+      })
         .then(res => res.json())
         .then(restaurants => {
             const select = document.querySelector("#results");
