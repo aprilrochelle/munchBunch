@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MunchBunch.Data;
 using MunchBunch.Models;
+using MunchBunch.Models.WishlistViewModels;
 
 namespace MunchBunch.Controllers
 {
@@ -35,35 +36,15 @@ namespace MunchBunch.Controllers
             var usersId = currUser.Id;
 
             var applicationDbContext = _context.Wishlist.Include(w => w.AppUser).Where(w => w.AppUserId == usersId);
-            return View(await applicationDbContext.ToListAsync());
+            var wishlist = await applicationDbContext.ToListAsync();
+
+            WishlistViewModel wishlistViewModel = new WishlistViewModel() {
+              WishlistItems = wishlist
+            };
+
+            return View(wishlistViewModel);
         }
 
-        // GET: Wishlists/Details/5
-        [Authorize]
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var wishlist = await _context.Wishlist
-                .Include(w => w.AppUser)
-                .FirstOrDefaultAsync(w => w.WishlistId == id);
-            if (wishlist == null)
-            {
-                return NotFound();
-            }
-
-            return View(wishlist);
-        }
-
-        // GET: Wishlists/Create
-        [Authorize]
-        public IActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Wishlists/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -111,7 +92,6 @@ namespace MunchBunch.Controllers
             }
 
         }
-
 
         // POST: Wishlists/Delete/5
         [HttpPost, ActionName("Delete")]
