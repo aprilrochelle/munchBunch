@@ -213,10 +213,14 @@ h1, h2 {
 /*         Login/Logout          */
 /*-------------------------------*/
 
-#LoginPage {
+.LoginPage {
   background-color: rgba(255, 255, 255, .8);
   width: 40%;
-  margin: 5px auto;
+  margin: 15px auto;
+}
+
+.LoginPage form {
+  margin-bottom: 25px;
 }
 
 .LogoutView {

@@ -4,10 +4,15 @@
     ViewData["Title"] = "Register";
 }
 <img class="LogoutView" />
-<h2 class="text-center">@ViewData["Title"]</h2>
+<div class="row">
+  <img class="logo2 col-md-2 col-md-offset-5" src="/images/MunchBunchLogo-1.png" />
+</div>
+
+<div class="LoginPage">
+<h2 class="text-center munchieHeader">@ViewData["Title"]</h2>
 
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-10 col-md-offset-1">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
             <hr />
@@ -27,9 +32,10 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Register</button>
+            <button type="submit" class="btn ate">Register</button>
         </form>
     </div>
+</div>
 </div>
 
 @section Scripts {
