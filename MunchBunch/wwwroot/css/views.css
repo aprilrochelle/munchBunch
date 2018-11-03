@@ -195,7 +195,7 @@ h1, h2 {
 .MemoirEdit {
   background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/b69e804c3d724067ae15b47eab1cd197?quality=95&fake=.png) no-repeat;
   background-size: 100%;
-  opacity: 0.8;
+  opacity: 0.7;
   height: 110vh;
   width: 100%;
   -webkit-background-size: cover;
@@ -203,6 +203,33 @@ h1, h2 {
   -o-background-size: cover;
   background-size: cover;
   position: absolute;
+  background-color: white;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/*-------------------------------*/
+/*         Login/Logout          */
+/*-------------------------------*/
+
+#LoginPage {
+  background-color: rgba(255, 255, 255, .8);
+  width: 40%;
+  margin: 5px auto;
+}
+
+.LogoutView {
+  background-size: 100%;
+  height: 110vh;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  background-color: var(--dark-teal);
+  color: white;
   top: 0;
   left: 0;
   z-index: -1;

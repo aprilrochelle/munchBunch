@@ -7,25 +7,32 @@
 @if (SignInManager.IsSignedIn(User))
 {
   <hr />
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar">
-        <ul class="nav sidebar-nav">
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="AppUsers" asp-action="Details">My Profile</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
-            </li>
-        </ul>
-    </form>
+  <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar">
+      <ul class="nav sidebar-nav">
+          <li>
+              <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+          </li>
+          <li>
+              <a asp-area="" asp-controller="AppUsers" asp-action="Details">My Profile</a>
+          </li>
+          <li>
+              <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+          </li>
+      </ul>
+  </form>
 }
 else
 {
   <hr />
+  <form asp-area="Identity" asp-page="/Account/Login" method="get" id="loginForm" class="navbar">
     <ul class="nav sidebar-nav">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+        <li><button type="submit" class="btn btn-link navbar-btn navbar-link">Login</button></li>
     </ul>
+  </form>
+  <form asp-area="Identity" asp-page="/Account/Register" method="get" id="registerForm" class="navbar">
+    <ul class="nav sidebar-nav">
+        <li><button type="submit" class="btn btn-link navbar-btn navbar-link">Register</button></li>
+    </ul>
+  </form>
+
 }
