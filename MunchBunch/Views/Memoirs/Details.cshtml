@@ -5,63 +5,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2 class="munchieHeader">Details</h2>
 
-<div>
-    <h4>Memoir</h4>
+
+    <h4 class="text-center">Memoir</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Memoir.RId)
-        </dt>
-        <dd>
+    <div class="detailDisplay">
+        <div class="detailItem col-md-12">
+            <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.Memoir.RId)</h5>
+            <p class="col-md-5">
             @Html.DisplayFor(model => model.Memoir.RId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Memoir.RestaurantName)
-        </dt>
-        <dd>
+            </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.Memoir.RestaurantName)</h5>
+          <p class="col-md-5">
             @Html.DisplayFor(model => model.Memoir.RestaurantName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Memoir.RestaurantLocation)
-        </dt>
-        <dd>
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.Memoir.RestaurantLocation)</h5>
+          <p class="col-md-5">
             @Html.DisplayFor(model => model.Memoir.RestaurantLocation)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Memoir.RestaurantAddress)
-        </dt>
-        <dd>
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.Memoir.RestaurantAddress)</h5>
+          <p class="col-md-5">
             @Html.DisplayFor(model => model.Memoir.RestaurantAddress)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Memoir.Dish)
-        </dt>
-        <dd>
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.Memoir.Dish)</h5>
+          <p class="col-md-5">
             @Html.DisplayFor(model => model.Memoir.Dish)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Memoir.Cocktail)
-        </dt>
-        <dd>
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.Memoir.Cocktail)</h5>
+          <p class="col-md-5">
             @Html.DisplayFor(model => model.Memoir.Cocktail)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Memoir.Comments)
-        </dt>
-        <dd>
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.Memoir.Comments)</h5>
+          <p class="col-md-5">
             @Html.DisplayFor(model => model.Memoir.Comments)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Memoir.AppUser)
-        </dt>
-        <dd>
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.Memoir.AppUser)</h5>
+          <p class="col-md-5">
             @Html.DisplayFor(model => model.Memoir.AppUser.FullName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Memoir.MemoirId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+          </p>
+        </div>
+  <div class="text-center">
+    <a class="btn ate" asp-action="Edit" asp-route-id="@Model.Memoir.MemoirId">Edit</a>
+    <a class="btn btn-default" asp-action="Index">Back to List</a>
+  </div>
+    </div>
+
+
