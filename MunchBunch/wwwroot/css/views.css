@@ -17,6 +17,23 @@ h1, h2 {
   margin-top: 7%;
 }
 
+.list {
+  text-align: center;
+  height: 68vh;
+  overflow: scroll;
+}
+
+.index-btn {
+  padding: 6px;
+  background-color: var(--dark-teal);
+  color: var(--lt-grey);
+}
+
+.index-btn:hover {
+  background-color: var(--lime);
+  color: var(--dark-teal);
+}
+
 /*-------------------------------*/
 /*            Index              */
 /*-------------------------------*/
@@ -54,6 +71,7 @@ h1, h2 {
 .restCard {
   width: 350px;
   height: 200px;
+  padding: 8px;
   display: inline-block;
   margin: 25px 2.5%;
   vertical-align: top;
@@ -87,6 +105,45 @@ h1, h2 {
   background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/3e2a207da9314fff89d4a3d5e845d122?quality=95&fake=.png) no-repeat;
   background-size: 100%;
   opacity: 0.4;
+  height: 110vh;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/*-------------------------------*/
+/*            Memoir             */
+/*-------------------------------*/
+
+#memoirs {
+  background-color: rgba(255, 255, 255, .8);
+  height: 80%;
+  width: 70%;
+  margin: 10% auto 0 auto;
+}
+
+.memoirCard {
+  height: 200px;
+  margin-bottom: 20px;
+  padding: 8px;
+  vertical-align: top;
+}
+
+.munchieHeader {
+  margin: 20px auto;
+  line-height: 60px;
+}
+
+.Memoir {
+  background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/426e873b2b0145ee88e37d6c32e99a3a?quality=95&fake=.png) no-repeat;
+  background-size: 100%;
+  opacity: 0.9;
   height: 110vh;
   width: 100%;
   -webkit-background-size: cover;

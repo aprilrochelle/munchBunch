@@ -47,7 +47,7 @@
             });
 
             if (resultsHtml === "") {
-              alert("No results found. Try again.");
+              resultsHtml += `<h4 class="text-center">No results found. Try your search again.</h4>`;
             }
 
             select.innerHTML = resultsHtml;

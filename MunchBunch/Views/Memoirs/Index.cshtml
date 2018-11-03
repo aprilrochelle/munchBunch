@@ -4,55 +4,28 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<img class="Memoir" />
 
-<h2>My Munchie Memoirs</h2>
+<div id="memoirs">
+  <h2 class="munchieHeader">My Munchie Memoirs</h2>
+  <div class="list">
+    @if((Model.Memoirs).Count() == 0) {
+      <h4>Add some Munchie Memoirs!</h4>
+    } else {
+      @foreach (var item in Model.Memoirs) {
+      <div class="memoirCard col-md-4">
+        <p>Restaurant Id: @Html.DisplayFor(modelItem => item.RId)</p>
+        <h4 class="restName">@Html.DisplayFor(modelItem => item.RestaurantName)</h4>
+        <h5>@Html.DisplayFor(modelItem => item.RestaurantLocation)</h5>
+        <p>@Html.DisplayFor(modelItem => item.RestaurantAddress)</p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Memoirs[0].RId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Memoirs[0].RestaurantName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Memoirs[0].RestaurantLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Memoirs[0].RestaurantAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Memoirs[0].AppUser)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Memoirs) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantAddress)
-            </td>
+        <a class="btn index-btn" asp-action="Edit" asp-route-id="@item.MemoirId">Edit</a>
+        <a class="btn index-btn" asp-action="Details" asp-route-id="@item.MemoirId">Details</a>
+        <a class="btn index-btn" asp-action="Delete" asp-route-id="@item.MemoirId">Delete</a>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.AppUser.FullName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MemoirId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MemoirId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MemoirId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+      </div>
+    }
+  }
+
+  </div>
+</div>
