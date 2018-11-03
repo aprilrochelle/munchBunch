@@ -1,9 +1,17 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\
 for details on configuring this project to bundle and minify static web assets. */
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+
+:root {
+  --dark-teal: #00474B;
+  --teal: #008C93;
+  --lime: #BED139;
+  --dark-grey: #47525E;
+  --md-grey: #8190A5;
+  --lt-grey: #D3DCE6;
+  --darkest: #000000;
 }
+
+
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
@@ -58,7 +66,7 @@ html { height: 100%;}
   margin-left: -220px;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #1a1a1a;
+  background: var(--dark-teal);
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -75,7 +83,7 @@ display: none;
 
 #page-content-wrapper {
   width: 100%;
-  padding-top: 70px;
+  border: none;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -111,7 +119,7 @@ display: none;
   z-index: -1;
   height: 100%;
   width: 3px;
-  background-color: #1c1c1c;
+  background-color: var(--dark-teal);
   -webkit-transition: width .2s ease-in;
     -moz-transition:  width .2s ease-in;
      -ms-transition:  width .2s ease-in;
@@ -120,10 +128,10 @@ display: none;
 }
 
 .sidebar-nav li:nth-child(2n+3):before {
-  background-color: #ec1b5a;
+  background-color: var(--teal);
 }
 .sidebar-nav li:nth-child(2n+2):before {
-  background-color: #79aefe;
+  background-color: var(--lime);
 }
 
 .sidebar-nav li:hover:before,
@@ -136,20 +144,25 @@ display: none;
 
 }
 
+.sidebar-nav li button,
+.navbar-inverse .navbar-link,
+.navbar-inverse .button-link,
 .sidebar-nav li a {
   display: block;
-  color: #ddd;
+  color: #fff;
   text-decoration: none;
   padding: 10px 15px 10px 30px;
 }
 
+.navbar-inverse .navbar-link:hover,
+.navbar-inverse .button-link:hover,
+.sidebar-nav li button:hover,
+.sidebar-nav li button:focus,
 .sidebar-nav li a:hover,
-.sidebar-nav li a:active,
 .sidebar-nav li a:focus,
 .sidebar-nav li.open a:hover,
-.sidebar-nav li.open a:active,
 .sidebar-nav li.open a:focus{
-  color: #fff;
+  color: var(--darkest);
   text-decoration: none;
   background-color: transparent;
 }

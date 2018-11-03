@@ -5,54 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>My Wishlist</h2>
+<img class="Wishlist" />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WishlistItems[0].RId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WishlistItems[0].RestaurantName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WishlistItems[0].RestaurantLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WishlistItems[0].RestaurantAddress)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.WishlistItems) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantAddress)
-            </td>
-            <td>
-              <form asp-action="Delete">
-                  <input type="hidden" name="WishlistId" asp-for="@item.WishlistId" />
-                  <input type="hidden" name="tried" value="true"/>
-                  <input type="submit" value="Tried It!" class="btn btn-success" />
-              </form>
-              <form asp-action="Delete">
-                  <input type="hidden" name="WishlistId" asp-for="@item.WishlistId" />
-                  <input type="submit" value="Delete" class="btn btn-info" />
-              </form>
+<div id="wishlists">
+  <h2 class="munchieHeader">My Wishlist</h2>
+  <div class="list">
+    @if((Model.WishlistItems).Count() == 0) {
+      <h4>Add some restaurants to your Wishlist!</h4>
+    } else {
+      @foreach (var item in Model.WishlistItems) {
+      <div class="memoirCard col-md-4">
+        <p>Restaurant Id: @Html.DisplayFor(modelItem => item.RId)</p>
+        <h4 class="restName">@Html.DisplayFor(modelItem => item.RestaurantName)</h4>
+        <h5>@Html.DisplayFor(modelItem => item.RestaurantLocation)</h5>
+        <p>@Html.DisplayFor(modelItem => item.RestaurantAddress)</p>
 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <form class="searchForm" asp-action="Delete">
+            <input type="hidden" name="WishlistId" asp-for="@item.WishlistId" />
+            <input type="hidden" name="tried" value="true"/>
+            <input class="btn index-btn" type="submit" value="Tried It!" class="btn btn-success" />
+        </form>
+        <form class="searchForm" asp-action="Delete">
+            <input type="hidden" name="WishlistId" asp-for="@item.WishlistId" />
+            <input class="btn index-btn" type="submit" value="Delete" class="btn btn-info" />
+        </form>
+      </div>
+    }
+  }
+
+  </div>
+</div>

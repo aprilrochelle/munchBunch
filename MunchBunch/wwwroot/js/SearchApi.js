@@ -11,6 +11,8 @@
       entityId = 1144;
     } else if (userLocation === "NEW ORLEANS") {
       entityId = 290;
+    } else{
+      alert('Please enter a city name in your User Profile.');
     }
 
       fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${entityId}&entity_type=city&q=${searchTerms}`, {
@@ -25,24 +27,28 @@
             let resultsHtml = "";
 
             restaurants.restaurants.map(restaurant => {
-                resultsHtml += `<div id="${restaurant.restaurant.R.res_id}"><h3>${restaurant.restaurant.name}</h3><h4>${restaurant.restaurant.location.locality}</h4><p>${restaurant.restaurant.location.address}</p>
-                  <form action="http://localhost:5000/memoirs/create" method="POST">
+                resultsHtml += `<div class="restCard" id="${restaurant.restaurant.R.res_id}"><h3 class="restName">${restaurant.restaurant.name}</h3><h4>${restaurant.restaurant.location.locality}</h4><p>${restaurant.restaurant.location.address}</p>
+                  <form class="searchForm" action="http://localhost:5000/memoirs/create" method="POST">
                     <input type="hidden" name="RId" value="${restaurant.restaurant.R.res_id}" />
                     <input type="hidden" name="RestaurantName" value="${restaurant.restaurant.name}" />
                     <input type="hidden" name="RestaurantLocation" value="${restaurant.restaurant.location.locality}" />
                     <input type="hidden" name="RestaurantAddress" value="${restaurant.restaurant.location.address}" />
-                   <button class="ate btn-success">Ate It!</button>
+                   <button class="ate">Ate It!</button>
                   </form>
-                  <form action="http://localhost:5000/wishlists/create" method="POST">
+                  <form class="searchForm" action="http://localhost:5000/wishlists/create" method="POST">
                     <input type="hidden" name="RId" value="${restaurant.restaurant.R.res_id}" />
                     <input type="hidden" name="RestaurantName" value="${restaurant.restaurant.name}" />
                     <input type="hidden" name="RestaurantLocation" value="${restaurant.restaurant.location.locality}" />
                     <input type="hidden" name="RestaurantAddress" value="${restaurant.restaurant.location.address}" />
-                    <button class="want btn-warning">Gotta Try!</button>
+                    <button class="want">Gotta Try!</button>
                   </form>
                   </div>`;
 
             });
+
+            if (resultsHtml === "") {
+              resultsHtml += `<h4 class="text-center">No results found. Try your search again.</h4>`;
+            }
 
             select.innerHTML = resultsHtml;
 
