@@ -112,7 +112,7 @@ h1, h2 {
 }
 
 .Index {
-  background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/3e2a207da9314fff89d4a3d5e845d122?quality=95&fake=.png) no-repeat;
+  background: url("/images/friends.jpg") no-repeat;
   background-size: 100%;
   opacity: 0.4;
   height: 110vh;
@@ -170,7 +170,7 @@ h1, h2 {
 }
 
 .Memoir {
-  background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/426e873b2b0145ee88e37d6c32e99a3a?quality=95&fake=.png) no-repeat;
+  background: url("/images/cocktail.jpg") no-repeat;
   background-size: 100%;
   opacity: 0.9;
   height: 110vh;
@@ -186,7 +186,7 @@ h1, h2 {
 }
 
 .Wishlist {
-  background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/675d846e2f624b8cb700c632373bb197?quality=95&fake=.png) no-repeat;
+  background: url("/images/asian.jpg") no-repeat;
   background-size: 100%;
   opacity: 0.8;
   height: 110vh;
@@ -202,7 +202,7 @@ h1, h2 {
 }
 
 .MemoirEdit {
-  background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/b69e804c3d724067ae15b47eab1cd197?quality=95&fake=.png) no-repeat;
+  background: url("/images/breakfast.jpg") no-repeat;
   background-size: 100%;
   opacity: 0.9;
   height: 110vh;
@@ -278,6 +278,33 @@ h1, h2 {
   position: absolute;
   background-color: var(--dark-teal);
   color: white;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+
+/*-------------------------------*/
+/*         User Profile          */
+/*-------------------------------*/
+
+.UserDetailPage {
+  margin-top: 7%;
+
+}
+
+.UserDetails {
+  background: url("/images/oysters.jpg") no-repeat;
+  background-size: 100%;
+  opacity: 0.3;
+  height: 110vh;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  background-color: white;
   top: 0;
   left: 0;
   z-index: -1;
