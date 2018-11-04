@@ -132,12 +132,21 @@ h1, h2 {
 /*-------------------------------*/
 
 #memoirs,
-#wishlists,
-.memoirView {
+#wishlists {
   background-color: rgba(255, 255, 255, .8);
+  border-radius: 5px;
   height: 80%;
   width: 70%;
-  margin: 10% auto 0 auto;
+  margin: 6% auto 0 auto;
+  padding-bottom: 20px;
+}
+
+.memoirView {
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: 5px;
+  height: 80%;
+  width: 50%;
+  margin: 6% auto 0 auto;
   padding-bottom: 20px;
 }
 
@@ -163,7 +172,7 @@ h1, h2 {
 .Memoir {
   background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/426e873b2b0145ee88e37d6c32e99a3a?quality=95&fake=.png) no-repeat;
   background-size: 100%;
-  opacity: 0.8;
+  opacity: 0.9;
   height: 110vh;
   width: 100%;
   -webkit-background-size: cover;
@@ -195,7 +204,41 @@ h1, h2 {
 .MemoirEdit {
   background: url(https://marvel-live.freetls.fastly.net/canvas/2018/10/b69e804c3d724067ae15b47eab1cd197?quality=95&fake=.png) no-repeat;
   background-size: 100%;
-  opacity: 0.7;
+  opacity: 0.9;
+  height: 110vh;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  background-color: white;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.MemoirDetails {
+  background: url("/images/burger.jpg") no-repeat;
+  background-size: 100%;
+  opacity: 0.3;
+  height: 110vh;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+  background-color: white;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.MemoirDelete {
+  background: url("/images/dining.jpg") no-repeat;
+  background-size: 100%;
+  opacity: 0.3;
   height: 110vh;
   width: 100%;
   -webkit-background-size: cover;
@@ -215,6 +258,7 @@ h1, h2 {
 
 .LoginPage {
   background-color: rgba(255, 255, 255, .8);
+  border-radius: 5px;
   width: 40%;
   margin: 15px auto;
 }
