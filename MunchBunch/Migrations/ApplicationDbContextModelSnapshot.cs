@@ -212,6 +212,24 @@ namespace MunchBunch.Migrations
                     b.ToTable("Memoir");
                 });
 
+            modelBuilder.Entity("MunchBunch.Models.UserFollow", b =>
+                {
+                    b.Property<int>("UserFollowId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AppUserId");
+
+                    b.Property<int>("FollowerId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("UserFollowId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("UserFollow");
+                });
+
             modelBuilder.Entity("MunchBunch.Models.Wishlist", b =>
                 {
                     b.Property<int>("WishlistId")
@@ -307,6 +325,13 @@ namespace MunchBunch.Migrations
                         .WithMany()
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MunchBunch.Models.UserFollow", b =>
+                {
+                    b.HasOne("MunchBunch.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("MunchBunch.Models.Wishlist", b =>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MunchBunch.Migrations
 {
-    public partial class readdDatabase : Migration
+    public partial class ReaddedDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
