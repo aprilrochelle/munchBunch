@@ -12,10 +12,13 @@ namespace MunchBunch.Models.UserFollowsViewModels
     {
 
         public List<UserFollow> Followships { get; set; }
-        public AppUser AppUser { get; set; }
 
-        public UserFollowsViewModel(AppUser appUser) {
-          AppUser = appUser;
+        public List<AppUser> UsersToFollow { get; set; }
+
+        public AppUser CurrentUser { get; set; }
+
+        public UserFollowsViewModel() {
+
         }
     }
 }
