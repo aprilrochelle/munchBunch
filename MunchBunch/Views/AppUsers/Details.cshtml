@@ -4,10 +4,13 @@
     ViewData["Title"] = "User Profile";
 }
 
-<h2>@ViewData["Title"]</h2>
+<img class="UserDetails" />
+<div class="UserDetailPage">
+<h2 class="munchieHeader">@ViewData["Title"]</h2>
 
-<div>
-    <h4>User Details</h4>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -30,8 +33,11 @@
         </dd>
 
     </dl>
+    <div>
+      <a class="btn ate" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+      <a class="btn btn-default" asp-controller="Home" asp-action="Index">Home</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-controller="Home" asp-action="Index">Home</a>
 </div>
+</div>
+
