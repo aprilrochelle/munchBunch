@@ -217,15 +217,19 @@ namespace MunchBunch.Migrations
                     b.Property<int>("UserFollowId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AppUserId");
-
                     b.Property<int>("FollowerId");
+
+                    b.Property<string>("ReceivingUserId");
+
+                    b.Property<string>("RequestingUserId");
 
                     b.Property<int>("UserId");
 
                     b.HasKey("UserFollowId");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("ReceivingUserId");
+
+                    b.HasIndex("RequestingUserId");
 
                     b.ToTable("UserFollow");
                 });
@@ -329,9 +333,13 @@ namespace MunchBunch.Migrations
 
             modelBuilder.Entity("MunchBunch.Models.UserFollow", b =>
                 {
-                    b.HasOne("MunchBunch.Models.AppUser", "AppUser")
+                    b.HasOne("MunchBunch.Models.AppUser", "ReceivingUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("ReceivingUserId");
+
+                    b.HasOne("MunchBunch.Models.AppUser", "RequestingUser")
+                        .WithMany()
+                        .HasForeignKey("RequestingUserId");
                 });
 
             modelBuilder.Entity("MunchBunch.Models.Wishlist", b =>

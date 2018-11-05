@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MunchBunch.Migrations
 {
-    public partial class ReaddedDatabase : Migration
+    public partial class AddlAppUserOnFollowingModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -183,6 +183,34 @@ namespace MunchBunch.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserFollow",
+                columns: table => new
+                {
+                    UserFollowId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<int>(nullable: false),
+                    ReceivingUserId = table.Column<string>(nullable: true),
+                    FollowerId = table.Column<int>(nullable: false),
+                    RequestingUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFollow", x => x.UserFollowId);
+                    table.ForeignKey(
+                        name: "FK_UserFollow_AspNetUsers_ReceivingUserId",
+                        column: x => x.ReceivingUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserFollow_AspNetUsers_RequestingUserId",
+                        column: x => x.RequestingUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Wishlist",
                 columns: table => new
                 {
@@ -248,6 +276,16 @@ namespace MunchBunch.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserFollow_ReceivingUserId",
+                table: "UserFollow",
+                column: "ReceivingUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserFollow_RequestingUserId",
+                table: "UserFollow",
+                column: "RequestingUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Wishlist_AppUserId",
                 table: "Wishlist",
                 column: "AppUserId");
@@ -272,6 +310,9 @@ namespace MunchBunch.Migrations
 
             migrationBuilder.DropTable(
                 name: "Memoir");
+
+            migrationBuilder.DropTable(
+                name: "UserFollow");
 
             migrationBuilder.DropTable(
                 name: "Wishlist");

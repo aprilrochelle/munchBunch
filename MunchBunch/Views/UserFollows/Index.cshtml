@@ -1,25 +1,13 @@
 @model MunchBunch.Models.UserFollowsViewModels.UserFollowsViewModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "The Bunch";
 }
 <div>
-
   <img class="Index" />
-  <div class="row">
-    <div class="col-md-8">
-      <h1 class="search-header text-center">Search</h1>
-      <form class="text-center">
-        <input id="userSearchQuery" name="searchQuery" type="text" placeholder="Search for Munchers to follow" />
-          <button id="bunchSearchBtn" type="submit">Search</button>
-      </form>
-      <div id="bunchResults"></div>
-    </div>
-    <div class="col-md-4">
-      <div id="myBunch">
-
-      </div>
-    </div>
-  </div>
-
+  <h2 class="search-header text-center">Search Munchers</h2>
+  <form asp-action="Search" class="text-center">
+    <input name="searchTerm" type="text" placeholder="Search for Munchers to follow" />
+      <button id="bunchSearchBtn" type="submit">Search</button>
+  </form>
 </div>

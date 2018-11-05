@@ -9,8 +9,8 @@ using MunchBunch.Data;
 namespace MunchBunch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181104043349_ReaddedDatabase")]
-    partial class ReaddedDatabase
+    [Migration("20181105153031_AddlAppUserOnFollowingModel")]
+    partial class AddlAppUserOnFollowingModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -214,6 +214,28 @@ namespace MunchBunch.Migrations
                     b.ToTable("Memoir");
                 });
 
+            modelBuilder.Entity("MunchBunch.Models.UserFollow", b =>
+                {
+                    b.Property<int>("UserFollowId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("FollowerId");
+
+                    b.Property<string>("ReceivingUserId");
+
+                    b.Property<string>("RequestingUserId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("UserFollowId");
+
+                    b.HasIndex("ReceivingUserId");
+
+                    b.HasIndex("RequestingUserId");
+
+                    b.ToTable("UserFollow");
+                });
+
             modelBuilder.Entity("MunchBunch.Models.Wishlist", b =>
                 {
                     b.Property<int>("WishlistId")
@@ -309,6 +331,17 @@ namespace MunchBunch.Migrations
                         .WithMany()
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MunchBunch.Models.UserFollow", b =>
+                {
+                    b.HasOne("MunchBunch.Models.AppUser", "ReceivingUser")
+                        .WithMany()
+                        .HasForeignKey("ReceivingUserId");
+
+                    b.HasOne("MunchBunch.Models.AppUser", "RequestingUser")
+                        .WithMany()
+                        .HasForeignKey("RequestingUserId");
                 });
 
             modelBuilder.Entity("MunchBunch.Models.Wishlist", b =>

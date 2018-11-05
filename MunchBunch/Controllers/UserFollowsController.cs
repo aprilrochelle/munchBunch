@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using MunchBunch.Data;
 using Microsoft.AspNetCore.Identity;
 using MunchBunch.Models.UserFollowsViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace MunchBunch.Controllers
 {
@@ -26,35 +27,41 @@ namespace MunchBunch.Controllers
 
         private Task<AppUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        // [Authorize]
-        //  public async Task<IActionResult> Index()
-        // {
-        //     // get current user
-        //     var currUser = await GetCurrentUserAsync();
+        [Authorize]
+        public async Task<IActionResult> Index()
+        {
 
-        //     UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel()
-        //     {
-        //       CurrentUser = currUser
-        //     };
-        //     return View(userFollowsViewModel);
-        // }
+          // get current user
+          var currUser = await GetCurrentUserAsync();
 
-        public async Task<IActionResult> Index(string searchTerm = "")
+          UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel() {
+            CurrentUser = currUser
+          };
+          return View(userFollowsViewModel);
+        }
+
+         [Authorize]
+        public async Task<IActionResult> Search(string searchTerm)
         {
           // get current user
           var currUser = await GetCurrentUserAsync();
           var usersId = currUser.Id;
 
-          // get all users I can follow
-          var applicationDbContext = _context.AppUser
-              .Where(u => u.Id != usersId)
-              .Where(u => u.FullName.Contains(searchTerm));
+          string sql = $@"
+            select *
+            from AspNetUsers au
+            left join UserFollow uf on au.Id = uf.UserId
+            where au.Id is not '{currUser.Id}' and
+            uf.FollowerId is not '{currUser.Id}' and
+            au.FirstName like '%{searchTerm}%' or au.LastName like '%{searchTerm}%' or au.PrimaryLocation like '%{searchTerm.ToUpper()}%'
+          ";
 
-          var listOtherUsers = applicationDbContext.ToList();
+          // get all users I can follow
+          var everyoneButMeNotFriends = _context.AppUser.FromSql(sql).ToList();
 
           UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel()
           {
-            UsersToFollow = listOtherUsers,
+            UsersToFollow = everyoneButMeNotFriends,
             CurrentUser = currUser
           };
             return View(userFollowsViewModel);
