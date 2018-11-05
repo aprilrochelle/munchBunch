@@ -50,9 +50,9 @@ namespace MunchBunch.Controllers
           string sql = $@"
             select *
             from AspNetUsers au
-            left join UserFollow uf on au.Id = uf.UserId
-            where au.Id is not '{currUser.Id}' and
-            uf.FollowerId is not '{currUser.Id}' and
+            left join UserFollow uf on au.Id = uf.ReceivingUserId
+            where au.Id is not '{usersId}' and
+            uf.RequestingUserId is not '{usersId}' and
             au.FirstName like '%{searchTerm}%' or au.LastName like '%{searchTerm}%' or au.PrimaryLocation like '%{searchTerm.ToUpper()}%'
           ";
 
@@ -65,6 +65,64 @@ namespace MunchBunch.Controllers
             CurrentUser = currUser
           };
             return View(userFollowsViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Follow(string userid)
+        {
+          // get current user
+          var currUser = await GetCurrentUserAsync();
+          var currUsersId = currUser.Id;
+
+          UserFollow uFollow = new UserFollow();
+
+          if (ModelState.IsValid)
+              {
+                  uFollow.ReceivingUserId = userid;
+                  uFollow.RequestingUserId = currUsersId;
+
+                  _context.Add(uFollow);
+                  await _context.SaveChangesAsync();
+              }
+          return RedirectToAction(nameof(ShowMyBunch));
+        }
+
+        [Authorize]
+        public async Task<IActionResult> ShowMyBunch()
+        {
+          // get current user
+          var currUser = await GetCurrentUserAsync();
+          var usersId = currUser.Id;
+
+          var myBunch = _context.UserFollow
+          .Include(u => u.ReceivingUser)
+          .Include(u => u.RequestingUser)
+          .Where(u => u.RequestingUserId == usersId).ToList();
+
+          UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel() {
+            CurrentUser = currUser,
+            UsersIFollow = myBunch
+          };
+
+          return View(userFollowsViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Unfollow(string userid)
+        {
+          // get current user
+          var currUser = await GetCurrentUserAsync();
+          var currUsersId = currUser.Id;
+
+          var userToUnfollow = await _context.UserFollow
+          .Where(u => u.RequestingUserId == currUsersId && u.ReceivingUserId == userid).FirstOrDefaultAsync();
+
+          _context.UserFollow.Remove(userToUnfollow);
+          await _context.SaveChangesAsync();
+          return RedirectToAction(nameof(ShowMyBunch));
+
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MunchBunch.Migrations
 {
-    public partial class AddlAppUserOnFollowingModel : Migration
+    public partial class ChangeToUserFollow : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -188,10 +188,8 @@ namespace MunchBunch.Migrations
                 {
                     UserFollowId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(nullable: false),
-                    ReceivingUserId = table.Column<string>(nullable: true),
-                    FollowerId = table.Column<int>(nullable: false),
-                    RequestingUserId = table.Column<string>(nullable: true)
+                    ReceivingUserId = table.Column<string>(nullable: false),
+                    RequestingUserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -201,13 +199,13 @@ namespace MunchBunch.Migrations
                         column: x => x.ReceivingUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserFollow_AspNetUsers_RequestingUserId",
                         column: x => x.RequestingUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

@@ -15,12 +15,12 @@ namespace MunchBunch.Models
 
         [Required]
         [Display (Name = "User ID")]
-        public int UserId { get; set; }
+        public string ReceivingUserId { get; set; }
         public AppUser ReceivingUser { get; set; }
 
         [Required]
         [Display(Name = "Follower Id")]
-        public int FollowerId { get; set; }
+        public string RequestingUserId { get; set; }
         public AppUser RequestingUser { get; set; }
     }
 }

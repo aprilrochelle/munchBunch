@@ -7,15 +7,19 @@
   <img class="Index" />
   <h2 class="search-header text-center">Search Munchers</h2>
   <div class="row">
+    @if((Model.UsersToFollow).Count() == 0) {
+      <h4 class="text-center">No matches. Try your <a asp-area="" asp-controller="UserFollows" asp-action="Index">search again.</a></h4>
+    } else {
     @foreach (var item in @Model.UsersToFollow) {
     <div class="userCard text-center col-md-3">
       <h4>@Html.DisplayFor(modelItem => item.FullName)</h4>
       <p>@Html.DisplayFor(modelItem => item.PrimaryLocation)</p>
       <form asp-action="Follow">
-        <input type="hidden" asp-for="@item.Id">
+        <input type="hidden" name="userid" asp-for="@item.Id">
         <button class="ate">Follow</button>
       </form>
     </div>
   }
+    }
   </div>
 </div>

@@ -9,8 +9,8 @@ using MunchBunch.Data;
 namespace MunchBunch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181105153031_AddlAppUserOnFollowingModel")]
-    partial class AddlAppUserOnFollowingModel
+    [Migration("20181105205841_ChangeToUserFollow")]
+    partial class ChangeToUserFollow
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -219,13 +219,11 @@ namespace MunchBunch.Migrations
                     b.Property<int>("UserFollowId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("FollowerId");
+                    b.Property<string>("ReceivingUserId")
+                        .IsRequired();
 
-                    b.Property<string>("ReceivingUserId");
-
-                    b.Property<string>("RequestingUserId");
-
-                    b.Property<int>("UserId");
+                    b.Property<string>("RequestingUserId")
+                        .IsRequired();
 
                     b.HasKey("UserFollowId");
 
@@ -337,11 +335,13 @@ namespace MunchBunch.Migrations
                 {
                     b.HasOne("MunchBunch.Models.AppUser", "ReceivingUser")
                         .WithMany()
-                        .HasForeignKey("ReceivingUserId");
+                        .HasForeignKey("ReceivingUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MunchBunch.Models.AppUser", "RequestingUser")
                         .WithMany()
-                        .HasForeignKey("RequestingUserId");
+                        .HasForeignKey("RequestingUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MunchBunch.Models.Wishlist", b =>

@@ -11,7 +11,9 @@ namespace MunchBunch.Models.UserFollowsViewModels
     public class UserFollowsViewModel
     {
 
-        public List<UserFollow> Followships { get; set; }
+        public List<UserFollow> UsersIFollow { get; set; }
+
+        public List<UserFollow> UsersFollowingMe { get; set; }
 
         public List<AppUser> UsersToFollow { get; set; }
 

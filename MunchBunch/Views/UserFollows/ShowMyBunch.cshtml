@@ -1,0 +1,25 @@
+@model MunchBunch.Models.UserFollowsViewModels.UserFollowsViewModel
+
+@{
+    ViewData["Title"] = "The Bunch";
+}
+<div>
+  <img class="Index" />
+  <h2 class="search-header text-center">My MunchBunch</h2>
+  <div class="row">
+    @if((Model.UsersIFollow).Count() == 0) {
+      <h4 class="text-center">Follow some fellow Munchers!</h4>
+    } else {
+    @foreach (var item in @Model.UsersIFollow) {
+    <div class="userCard text-center col-md-4">
+      <h3>@Html.DisplayFor(modelItem => item.ReceivingUser.FullName)</h3>
+      <h5>@Html.DisplayFor(modelItem => item.ReceivingUser.PrimaryLocation)</h5>
+      <form asp-action="Unfollow">
+        <input type="hidden" name="userid" asp-for="@item.ReceivingUserId">
+        <button class="btn index-btn">Unfollow</button>
+      </form>
+    </div>
+  }
+    }
+  </div>
+</div>
