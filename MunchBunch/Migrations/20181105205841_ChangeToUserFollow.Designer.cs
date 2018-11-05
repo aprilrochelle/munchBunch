@@ -9,8 +9,8 @@ using MunchBunch.Data;
 namespace MunchBunch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181101174331_readdDatabase")]
-    partial class readdDatabase
+    [Migration("20181105205841_ChangeToUserFollow")]
+    partial class ChangeToUserFollow
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -214,6 +214,26 @@ namespace MunchBunch.Migrations
                     b.ToTable("Memoir");
                 });
 
+            modelBuilder.Entity("MunchBunch.Models.UserFollow", b =>
+                {
+                    b.Property<int>("UserFollowId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ReceivingUserId")
+                        .IsRequired();
+
+                    b.Property<string>("RequestingUserId")
+                        .IsRequired();
+
+                    b.HasKey("UserFollowId");
+
+                    b.HasIndex("ReceivingUserId");
+
+                    b.HasIndex("RequestingUserId");
+
+                    b.ToTable("UserFollow");
+                });
+
             modelBuilder.Entity("MunchBunch.Models.Wishlist", b =>
                 {
                     b.Property<int>("WishlistId")
@@ -308,6 +328,19 @@ namespace MunchBunch.Migrations
                     b.HasOne("MunchBunch.Models.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MunchBunch.Models.UserFollow", b =>
+                {
+                    b.HasOne("MunchBunch.Models.AppUser", "ReceivingUser")
+                        .WithMany()
+                        .HasForeignKey("ReceivingUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MunchBunch.Models.AppUser", "RequestingUser")
+                        .WithMany()
+                        .HasForeignKey("RequestingUserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

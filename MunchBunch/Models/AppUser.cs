@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MunchBunch.Models
 {
@@ -29,5 +30,11 @@ namespace MunchBunch.Models
         [Required]
         [Display(Name = "Primary City")]
         public string PrimaryLocation { get; set; }
+
+        // [Display(Name = "Image")]
+        // public byte[] Image { get; set; }
+
+        // [NotMapped]
+        // public HttpPostedFileBase Content { get; set; }
     }
 }

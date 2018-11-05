@@ -62,6 +62,7 @@ namespace MunchBunch.Controllers
 
             currUser.FirstName = appUser.FirstName;
             currUser.LastName = appUser.LastName;
+            // currUser.PhotoSrc = appUser.PhotoSrc;
             currUser.PrimaryLocation = appUser.PrimaryLocation.ToUpper();
 
             if (ModelState.IsValid)

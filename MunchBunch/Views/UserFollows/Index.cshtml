@@ -1,0 +1,13 @@
+@model MunchBunch.Models.UserFollowsViewModels.UserFollowsViewModel
+
+@{
+    ViewData["Title"] = "The Bunch";
+}
+<div>
+  <img class="Index" />
+  <h2 class="search-header text-center">Search Munchers</h2>
+  <form asp-action="Search" class="text-center">
+    <input name="searchTerm" type="text" placeholder="Search for Munchers to follow" />
+      <button id="bunchSearchBtn" type="submit">Search</button>
+  </form>
+</div>
