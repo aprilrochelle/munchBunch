@@ -6,11 +6,11 @@
 }
 <img class="Memoir" />
 
-<div id="memoirs">
+<div class="memoirs">
   <h1 class="munchieHeader">My Munchie Memoirs</h1>
   <div class="list">
     @if((Model.Memoirs).Count() == 0) {
-      <h4>Add some Munchie Memoirs!</h4>
+      <h4>Add some Munchie Memoirs! <a asp-area="" asp-controller="Home" asp-action="Index">Click here!</a></h4>
     } else {
       @foreach (var item in Model.Memoirs) {
       <div class="memoirCard col-md-4">

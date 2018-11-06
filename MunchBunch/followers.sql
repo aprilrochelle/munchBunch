@@ -2,6 +2,7 @@
 select FirstName || LastName 'Full Name', PrimaryLocation 'Location'
 from AspNetUsers au
 left join UserFollow uf on au.Id = uf.UserId
-where au.Id is not "f7a1d774-5b91-40c6-a69b-6c0fa633e970" and
-uf.FollowerId is not "f7a1d774-5b91-40c6-a69b-6c0fa633e970";
+where au.Id is not "3bc119c1-212e-4829-ba4c-bed4c2cf7f50" and
+uf.FollowerId is not "3bc119c1-212e-4829-ba4c-bed4c2cf7f50" and
+FirstName like '%Dar%' or LastName like "%Dar%" or PrimaryLocation like "%Dar%";
 

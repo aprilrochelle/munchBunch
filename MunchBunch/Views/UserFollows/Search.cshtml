@@ -6,7 +6,7 @@
 <div>
   <img class="Index" />
   <h2 class="search-header text-center">Search Munchers</h2>
-  <div class="row">
+  <div class="row muncher-results">
     @if((Model.UsersToFollow).Count() == 0) {
       <h4 class="text-center">No matches. Try your <a asp-area="" asp-controller="UserFollows" asp-action="Index">search again.</a></h4>
     } else {
