@@ -53,12 +53,14 @@ h1, h2 {
 /*            Index              */
 /*-------------------------------*/
 
-#results {
+#results,
+.muncher-results {
   overflow: scroll;
-  height: 60vh;
+  height: 65vh;
 }
 
-#searchQuery {
+#searchQuery,
+#muncherQuery {
   background-color: #FFFFFF;
   border: 1px solid #8492A6;
   border-radius: 5px;
@@ -66,7 +68,8 @@ h1, h2 {
   height: 45px;
 }
 
-#searchBtn {
+#searchBtn,
+#bunchSearchBtn {
   height: 45px;
   border-radius: 5px;
   background-color: var(--dark-teal);
@@ -136,7 +139,7 @@ h1, h2 {
 /*       Memoir/Wishlist         */
 /*-------------------------------*/
 
-#memoirs,
+.memoirs,
 #wishlists {
   background-color: rgba(255, 255, 255, .8);
   border-radius: 5px;

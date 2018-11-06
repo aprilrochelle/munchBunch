@@ -17,7 +17,13 @@ namespace MunchBunch.Models.UserFollowsViewModels
 
         public List<AppUser> UsersToFollow { get; set; }
 
-        public AppUser CurrentUser { get; set; }
+        public List<Memoir> MuncherMemoirs { get; set; }
+
+        public Memoir FeaturedMemoir { get; set; }
+
+        public string UserId { get; set; }
+
+        public AppUser User { get; set; }
 
         public UserFollowsViewModel() {
 

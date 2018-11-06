@@ -35,7 +35,7 @@ namespace MunchBunch.Controllers
           var currUser = await GetCurrentUserAsync();
 
           UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel() {
-            CurrentUser = currUser
+            User = currUser
           };
           return View(userFollowsViewModel);
         }
@@ -54,6 +54,7 @@ namespace MunchBunch.Controllers
             where au.Id is not '{usersId}' and
             uf.RequestingUserId is not '{usersId}' and
             au.FirstName like '%{searchTerm}%' or au.LastName like '%{searchTerm}%' or au.PrimaryLocation like '%{searchTerm.ToUpper()}%'
+            group by au.Id
           ";
 
           // get all users I can follow
@@ -62,7 +63,7 @@ namespace MunchBunch.Controllers
           UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel()
           {
             UsersToFollow = everyoneButMeNotFriends,
-            CurrentUser = currUser
+            User = currUser
           };
             return View(userFollowsViewModel);
         }
@@ -101,12 +102,47 @@ namespace MunchBunch.Controllers
           .Where(u => u.RequestingUserId == usersId).ToList();
 
           UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel() {
-            CurrentUser = currUser,
+            User = currUser,
             UsersIFollow = myBunch
           };
 
           return View(userFollowsViewModel);
         }
+
+
+        [Authorize]
+        public async Task<IActionResult> SeeMemoirs(string userid, AppUser user)
+        {
+          var muncherMemoirs = _context.Memoir.Include(m => m.AppUser).Where(m => m.AppUserId == userid);
+          var memoirList = await muncherMemoirs.ToListAsync();
+
+          UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel() {
+            MuncherMemoirs = memoirList,
+            UserId = userid,
+            User = user
+          };
+
+          return View(userFollowsViewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MemoirDetails(int id, string userid, AppUser user)
+        {
+
+          var memoir = await _context.Memoir
+              .Include(m => m.AppUser)
+              .FirstOrDefaultAsync(m => m.MemoirId == id);
+
+          UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel() {
+            FeaturedMemoir = memoir,
+            UserId = userid,
+            User = user
+          };
+
+          return View(userFollowsViewModel);
+        }
+
+
 
         [Authorize]
         [HttpPost]

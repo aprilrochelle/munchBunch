@@ -1,0 +1,76 @@
+@model MunchBunch.Models.UserFollowsViewModels.UserFollowsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img class="MemoirDetails" />
+<h2 class="munchieHeader">Details</h2>
+
+
+    <hr />
+    <div class="detailDisplay">
+        <div class="detailItem col-md-12">
+            <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.FeaturedMemoir.RId)</h5>
+            <p class="col-md-5">
+            @Html.DisplayFor(model => model.FeaturedMemoir.RId)
+            </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.FeaturedMemoir.RestaurantName)</h5>
+          <p class="col-md-5">
+            @Html.DisplayFor(model => model.FeaturedMemoir.RestaurantName)
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.FeaturedMemoir.RestaurantLocation)</h5>
+          <p class="col-md-5">
+            @Html.DisplayFor(model => model.FeaturedMemoir.RestaurantLocation)
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.FeaturedMemoir.RestaurantAddress)</h5>
+          <p class="col-md-5">
+            @Html.DisplayFor(model => model.FeaturedMemoir.RestaurantAddress)
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.FeaturedMemoir.Dish)</h5>
+          <p class="col-md-5">
+            @Html.DisplayFor(model => model.FeaturedMemoir.Dish)
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.FeaturedMemoir.Cocktail)</h5>
+          <p class="col-md-5">
+            @Html.DisplayFor(model => model.FeaturedMemoir.Cocktail)
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.FeaturedMemoir.Comments)</h5>
+          <p class="col-md-5">
+            @Html.DisplayFor(model => model.FeaturedMemoir.Comments)
+          </p>
+        </div>
+
+        <div class="detailItem col-md-12">
+          <h5 class="col-md-5 text-right">@Html.DisplayNameFor(model => model.FeaturedMemoir.AppUser)</h5>
+          <p class="col-md-5">
+            @Html.DisplayFor(model => model.FeaturedMemoir.AppUser.FullName)
+          </p>
+        </div>
+  <div class="text-center">
+    <form asp-action="SeeMemoirs">
+        <input type="hidden" name="userid" asp-for="@Model.FeaturedMemoir.AppUserId">
+        <input type="hidden" name="user" asp-for="@Model.FeaturedMemoir.AppUser">
+        <button class="btn index-btn">Go Back</button>
+      </form>
+  </div>
+    </div>
