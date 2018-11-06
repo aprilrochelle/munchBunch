@@ -54,6 +54,7 @@ h1, h2 {
 /*-------------------------------*/
 
 #results,
+#below,
 .muncher-results {
   overflow: scroll;
   height: 65vh;

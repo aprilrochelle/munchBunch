@@ -9,8 +9,8 @@ using MunchBunch.Data;
 namespace MunchBunch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181105205841_ChangeToUserFollow")]
-    partial class ChangeToUserFollow
+    [Migration("20181106182221_AddImageToUser")]
+    partial class AddImageToUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -266,6 +266,8 @@ namespace MunchBunch.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired();
+
+                    b.Property<byte[]>("Image");
 
                     b.Property<string>("LastName")
                         .IsRequired();

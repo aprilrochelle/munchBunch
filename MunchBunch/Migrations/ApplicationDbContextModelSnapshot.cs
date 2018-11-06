@@ -265,6 +265,8 @@ namespace MunchBunch.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired();
 
+                    b.Property<byte[]>("Image");
+
                     b.Property<string>("LastName")
                         .IsRequired();
 
