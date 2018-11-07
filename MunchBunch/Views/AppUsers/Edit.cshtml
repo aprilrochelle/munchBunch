@@ -1,4 +1,4 @@
-﻿@model MunchBunch.Models.AppUser
+﻿@model MunchBunch.Models.AppUserViewModel
 
 @{
     ViewData["Title"] = "Edit Your Profile";
@@ -12,24 +12,27 @@
 <hr />
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="AppUser.Id" />
+              <div class="form-group">
+                <input type="file" asp-for="ImageFile" />
+              </div>
 
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="AppUser.FirstName" class="control-label"></label>
+                <input asp-for="AppUser.FirstName" class="form-control" />
+                <span asp-validation-for="AppUser.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="AppUser.LastName" class="control-label"></label>
+                <input asp-for="AppUser.LastName" class="form-control" />
+                <span asp-validation-for="AppUser.LastName" class="text-danger"></span>
             </div>
             <div>
-                <label asp-for="PrimaryLocation" class="control-label"></label>
-                <input asp-for="PrimaryLocation" class="form-control" />
-                <span asp-validation-for="PrimaryLocation" class="text-danger"></span>
+                <label asp-for="AppUser.PrimaryLocation" class="control-label"></label>
+                <input asp-for="AppUser.PrimaryLocation" class="form-control" />
+                <span asp-validation-for="AppUser.PrimaryLocation" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
