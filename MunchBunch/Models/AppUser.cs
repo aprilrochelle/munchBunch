@@ -34,7 +34,5 @@ namespace MunchBunch.Models
         [Display(Name = "Image")]
         public byte[] Image { get; set; }
 
-        // [NotMapped]
-        // public HttpPostedFileBase Content { get; set; }
     }
 }

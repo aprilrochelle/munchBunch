@@ -12,7 +12,7 @@ namespace MunchBunch.Models
     {
         public AppUser AppUser { get; set; }
 
-        public IFormFile Image { get; set; }
+        public Microsoft.AspNetCore.Http.IFormFile ImageFile { get; set; }
 
         public AppUserViewModel() {
 

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +38,12 @@ namespace MunchBunch.Controllers
             var userDetails = await _context.AppUser
                 .FindAsync(usersId);
 
-            return View(userDetails);
+
+
+            AppUserViewModel appUserViewModel = new AppUserViewModel(){
+              AppUser = userDetails
+            };
+            return View(appUserViewModel);
         }
 
 
@@ -50,23 +57,40 @@ namespace MunchBunch.Controllers
             var userDetails = await _context.AppUser
                 .FindAsync(usersId);
 
-            return View(userDetails);
+
+            AppUserViewModel appUserViewModel = new AppUserViewModel(){
+              AppUser = userDetails,
+            };
+
+            // using (MemoryStream mStream = new MemoryStream(userDetails.Image))
+            // {
+            //   appUserViewModel.ImageFile = System.Net.Mime.MediaTypeNames.Image.FromStream(mStream);
+            // }
+            return View(appUserViewModel);
         }
 
         // POST: AppUsers/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("FirstName, LastName, PrimaryLocation")] AppUser appUser)
+        public async Task<IActionResult> Edit(AppUserViewModel model)
         {
+
             var currUser = await GetCurrentUserAsync();
-
-            currUser.FirstName = appUser.FirstName;
-            currUser.LastName = appUser.LastName;
-            // currUser.PhotoSrc = appUser.PhotoSrc;
-            currUser.PrimaryLocation = appUser.PrimaryLocation.ToUpper();
-
-            if (ModelState.IsValid)
+            if  (ModelState.IsValid)
             {
+
+                currUser.FirstName = model.AppUser.FirstName;
+                currUser.LastName = model.AppUser.LastName;
+                currUser.PrimaryLocation = model.AppUser.PrimaryLocation.ToUpper();
+
+                if(model.ImageFile != null) {
+                  using (var memoryStream = new MemoryStream())
+                  {
+                      await model.ImageFile.CopyToAsync(memoryStream);
+                      currUser.Image = memoryStream.ToArray();
+                  }
+                };
 
                 _context.Update(currUser);
                 await _context.SaveChangesAsync();

@@ -9,8 +9,8 @@ using MunchBunch.Data;
 namespace MunchBunch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181106182221_AddImageToUser")]
-    partial class AddImageToUser
+    [Migration("20181107171648_ReAddDatabse")]
+    partial class ReAddDatabse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MunchBunch.Migrations
 {
-    public partial class AddImageToUser : Migration
+    public partial class ReAddDatabse : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
