@@ -54,43 +54,22 @@ namespace MunchBunch.Controllers
             from AspNetUsers au
             left join UserFollow uf on au.Id = uf.ReceivingUserId
             where au.Id is not '{usersId}' and
-            uf.RequestingUserId = '{usersId}'
+            uf.RequestingUserId is not '{usersId}'
             group by au.Id";
 
-      var everyoneIFollowAlready = _context.AppUser.FromSql(sql1).ToList();
+      var everyoneNotMe = _context.AppUser.FromSql(sql1).ToList();
 
-      string sql2 = $@"
-            select *
-            from AspNetUsers au
-            where au.Id is not '{usersId}'
-
-      ";
-
-      var everyUserButMe = _context.AppUser.FromSql(sql2).ToList();
       List<AppUser> usersToFollow = new List<AppUser>();
-      List<AppUser> usersICanFollowSearch = new List<AppUser>();
 
-      foreach (var user in everyUserButMe)
-      {
-        foreach (var person in everyoneIFollowAlready) {
-          if (person.Id != user.Id) {
-            usersToFollow.Add(user);
-          }
+      foreach (var person in everyoneNotMe) {
+        if (person.FirstName.Contains(searchTerm) || person.LastName.Contains(searchTerm) || person.PrimaryLocation.Contains(searchTerm.ToUpper())) {
+          usersToFollow.Add(person);
         }
       }
-
-      foreach(var user in usersToFollow)
-      {
-        if (user.FirstName.Contains(searchTerm) || user.LastName.Contains(searchTerm) || user.PrimaryLocation.Contains(searchTerm))
-        {
-          usersICanFollowSearch.Add(user);
-        }
-      }
-
 
       UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel()
       {
-        UsersToFollow = usersICanFollowSearch,
+        UsersToFollow = usersToFollow,
         User = currUser
       };
       return View(userFollowsViewModel);
