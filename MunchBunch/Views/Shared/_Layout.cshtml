@@ -12,90 +12,110 @@
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/views.css" />
     </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/views.css" />
+    </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
 </head>
 <body>
-  <div id="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-        <ul class="nav sidebar-nav">
-            <li class="sidebar-brand text-center">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    <img class="logo" src="/images/MunchBunchLogo-1.png" />
-                </a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Home" asp-action="Index">Search</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Memoirs" asp-action="Index">Munchie Memoirs</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Wishlists" asp-action="Index">Wishlist</a>
-            </li>
-            <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My MunchBunch<span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a asp-area="" asp-controller="UserFollows" asp-action="ShowMyBunch"> Munchers I Follow</a></li>
-                    <li><a asp-area="" asp-controller="UserFollows" asp-action="Index">Search Munchers</a></li>
-                  </ul>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand text-center">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                        <img class="logo" src="/images/MunchBunchLogo-1.png" />
+                    </a>
                 </li>
-              <partial name="_LoginPartial" />
-        </ul>
-    </nav>
-    <!-- #sidebar-wrapper -->
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Search</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Memoirs" asp-action="Index">Munchie Memoirs</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Wishlists" asp-action="Index">Wishlist</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">My MunchBunch<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a asp-area="" asp-controller="UserFollows" asp-action="ShowMyBunch"> Munchers I Follow</a></li>
+                        <li><a asp-area="" asp-controller="UserFollows" asp-action="Index">Search Munchers</a></li>
+                    </ul>
+                </li>
+                <partial name="_LoginPartial" />
+            </ul>
+        </nav>
+        <!-- #sidebar-wrapper -->
 
-    <partial name="_CookieConsentPartial" />
 
-    <div id="page-content-wrapper" class="container body-content">
-      <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+        <div id="page-content-wrapper" class="container body-content">
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
                 <span class="hamb-top"></span>
-    			<span class="hamb-middle"></span>
-				<span class="hamb-bottom"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
             </button>
-        @RenderBody()
+            @RenderBody()
 
-        <footer>
-          <hr />
-            <p>&copy; 2018 - MunchBunch</p>
-        </footer>
-    </div>
+            <footer>
+                <hr />
+                <p>&copy; 2018 - MunchBunch</p>
+            </footer>
+        </div>
 
-    <environment include="Development">
-        <script type="text/javascript">
+        <environment include="Development">
+            <script type="text/javascript">
             const apiKey = Object.create(null, {
                 "Key": {
                     get: () => '@AppSettings.Key'
                 }
             })
             Object.freeze(apiKey)
-        </script>
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/SearchApi.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+            </script>
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/js/SearchApi.js" asp-append-version="true"></script>
+        </environment>
+        <environment include="Production">
+            <script type="text/javascript">
+            const apiKey = Object.create(null, {
+                "Key": {
+                    get: () => '@AppSettings.Key'
+                }
+            })
+            Object.freeze(apiKey)
+            </script>
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/js/SearchApi.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+       
 
-    @RenderSection("Scripts", required: false)
-  </div>
+        @RenderSection("Scripts", required: false)
+    </div>
 </body>
 </html>
