@@ -1,4 +1,4 @@
-# MunchBunch
+<img src="/images/MunchBunchLogo-1.png" width="250" />
 
 ## Description
 MunchBunch is an app for foodies! Users can follow each other and share their "memoirs" to view the great places they've been and tasty things they've tried.
