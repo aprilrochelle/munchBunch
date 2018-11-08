@@ -159,11 +159,12 @@ h1, h2 {
   padding-bottom: 20px;
 }
 
-.memoirCard {
-  height: 200px;
-  margin-bottom: 20px;
-  padding: 8px;
-  vertical-align: top;
+.memoirCard,
+.userCard {
+    height: 200px;
+    margin-bottom: 20px;
+    padding: 8px;
+    vertical-align: top;
 }
 
 .munchieHeader {
