@@ -27,8 +27,8 @@ namespace MunchBunch.Controllers
 
         private Task<AppUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        // GET: Wishlists
         [Authorize]
+        // GET: Wishlists
         public async Task<IActionResult> Index()
         {
           //filter by current user
