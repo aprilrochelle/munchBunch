@@ -6,13 +6,15 @@
     let entityId = "";
 
     if (userLocation === "NASHVILLE") {
-      entityId = 1138;
+        entityId = 1138;
     } else if (userLocation === "MEMPHIS") {
-      entityId = 1144;
+        entityId = 1144;
     } else if (userLocation === "NEW ORLEANS") {
-      entityId = 290;
-    } else{
-      alert('Please enter a city name in your User Profile.');
+        entityId = 290;
+    } else if (userLocation === "ATLANTA") {
+        entityId = 288;
+    } else {
+      alert('Please enter a valid city name in your User Profile.');
     }
 
       fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${entityId}&entity_type=city&q=${searchTerms}`, {

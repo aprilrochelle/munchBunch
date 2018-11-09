@@ -50,12 +50,18 @@ namespace MunchBunch.Controllers
       var usersId = currUser.Id;
 
       string sql1 = $@"
-            select *
+            select Id, UserName, NormalizedUserName, Email, NormalizedEmail, EmailConfirmed, PasswordHash,
+                SecurityStamp, ConcurrencyStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, 
+                LockoutEnabled, AccessFailedCount, Discriminator, FirstName, LastName, PrimaryLocation, [Image]
             from AspNetUsers au
             left join UserFollow uf on au.Id = uf.ReceivingUserId
-            where au.Id is not '{usersId}' and
-            uf.RequestingUserId is not '{usersId}'
-            group by au.Id";
+            where not au.Id = '{usersId}' or
+            not uf.RequestingUserId = '{usersId}'
+            group by au.Id, au.FirstName, au.LastName, au.PrimaryLocation, au.UserName, au.NormalizedUserName, 
+            au.Email, au.NormalizedEmail, au.EmailConfirmed, au.PasswordHash,
+                au.SecurityStamp, au.ConcurrencyStamp, au.PhoneNumber, au.PhoneNumberConfirmed, 
+                au.TwoFactorEnabled, au.LockoutEnd, 
+                au.LockoutEnabled, au.AccessFailedCount, au.Discriminator, au.[Image]";
 
       var everyoneNotMe = _context.AppUser.FromSql(sql1).ToList();
 
@@ -83,18 +89,28 @@ namespace MunchBunch.Controllers
       var currUser = await GetCurrentUserAsync();
       var currUsersId = currUser.Id;
 
-      UserFollow uFollow = new UserFollow();
+        // double check to make sure I'm not following them already
+        var doIFollow = (_context.UserFollow
+            .Where(f => f.ReceivingUserId == userid)
+            .Where(f => f.RequestingUserId == currUsersId)).Count();
 
-      if (ModelState.IsValid)
-      {
-        uFollow.ReceivingUserId = userid;
-        uFollow.RequestingUserId = currUsersId;
+        if(doIFollow == 0)
+            {
+                UserFollow uFollow = new UserFollow();
 
-        _context.Add(uFollow);
-        await _context.SaveChangesAsync();
-      }
-      return RedirectToAction(nameof(ShowMyBunch));
-    }
+                if (ModelState.IsValid)
+                {
+                    uFollow.ReceivingUserId = userid;
+                    uFollow.RequestingUserId = currUsersId;
+
+                    _context.Add(uFollow);
+                    await _context.SaveChangesAsync();
+                }
+                return RedirectToAction(nameof(ShowMyBunch));
+            }
+
+            return RedirectToAction(nameof(ShowMyBunch));
+        }
 
     [Authorize]
     public async Task<IActionResult> ShowMyBunch()

@@ -5,9 +5,6 @@ MunchBunch is an app for foodies! Users can follow each other and share their "m
 
 Using the Zomato API, users can search restaurants in their primary location and then create, edit or delete memoirs. They can also add restaurants to their wishlist and remove them once they've visited the wishlisted restaurant.
 
-## Live Demo
-Check it out here: [MunchBunch](https://aprilrwatson.com)
-
 ## Technologies Used
 - Zomato API
 - ASP.Net

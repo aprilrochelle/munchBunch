@@ -17,12 +17,6 @@
     } else {
       @foreach (var item in Model.MuncherMemoirs) {
       <div class="memoirCard col-md-4">
-        @{
-              var base64 = Convert.ToBase64String(@item.AppUser.Image);
-              var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-          }
-
-          <img class="userImg" src="@imgSrc" />
         <p>@Html.DisplayFor(modelItem => item.AppUser.FullName)</p>
         <h4 class="restName">@Html.DisplayFor(modelItem => item.RestaurantName)</h4>
         <h5>@Html.DisplayFor(modelItem => item.RestaurantLocation)</h5>
