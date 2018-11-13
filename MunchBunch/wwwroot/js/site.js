@@ -2,9 +2,9 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 $(document).ready(function () {
-  var trigger = $('.hamburger'),
-      overlay = $('.overlay'),
-     isClosed = false;
+    var trigger = $('.hamburger');
+    var overlay = $('.overlay');
+    var isClosed = false;
 
     trigger.click(function () {
       hamburger_cross();

@@ -62,10 +62,6 @@ namespace MunchBunch.Controllers
               AppUser = userDetails,
             };
 
-            // using (MemoryStream mStream = new MemoryStream(userDetails.Image))
-            // {
-            //   appUserViewModel.ImageFile = System.Net.Mime.MediaTypeNames.Image.FromStream(mStream);
-            // }
             return View(appUserViewModel);
         }
 
@@ -84,7 +80,8 @@ namespace MunchBunch.Controllers
                 currUser.LastName = model.AppUser.LastName;
                 currUser.PrimaryLocation = model.AppUser.PrimaryLocation.ToUpper();
 
-                if(model.ImageFile != null) {
+                if(model.ImageFile != null)
+                {
                   using (var memoryStream = new MemoryStream())
                   {
                       await model.ImageFile.CopyToAsync(memoryStream);

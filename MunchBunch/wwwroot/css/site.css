@@ -96,6 +96,7 @@ display: none;
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
   margin-right: -220px;
+  top: 0;
 }
 
 /*-------------------------------*/
