@@ -101,14 +101,12 @@ h1, h2 {
 
 
 .userCard {
-    width: 350px;
-    height: 400px;
+    height: 350px;
     padding: 8px;
-    display: inline-block;
-    margin: 25px 2.5%;
+    /*display: inline-block;*/
+    margin: 25px auto;
     vertical-align: top;
     text-align: center;
-
 }
 
 .restName {
@@ -171,8 +169,7 @@ h1, h2 {
   padding-bottom: 20px;
 }
 
-.memoirCard,
-.userCard {
+.memoirCard {
     height: 200px;
     margin-bottom: 20px;
     padding: 8px;
