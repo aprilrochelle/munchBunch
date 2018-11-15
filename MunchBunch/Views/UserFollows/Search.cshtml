@@ -11,20 +11,27 @@
       <h4 class="text-center">No matches. Try your <a asp-area="" asp-controller="UserFollows" asp-action="Index">search again.</a></h4>
     } else {
     @foreach (var item in @Model.UsersToFollow) {
-    <div class="userCard text-center col-md-4">
-       @{
-              var base64 = Convert.ToBase64String(@item.Image);
-              var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+      <div class="userCard text-center col-md-4">
+          @if (item.Image == null)
+          {
+              <img class="userImg" src="~/images/medium-default-avatar.png" />
           }
+          else if (item.Image != null)
+          {
+              
+                  var base64 = Convert.ToBase64String(@item.Image);
+                  var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+              
 
-          <img class="userImg" src="@imgSrc" />
-      <h4>@Html.DisplayFor(modelItem => item.FullName)</h4>
-      <p>@Html.DisplayFor(modelItem => item.PrimaryLocation)</p>
-      <form asp-action="Follow">
-        <input type="hidden" name="userid" asp-for="@item.Id">
-        <button class="ate">Follow</button>
-      </form>
-    </div>
+              <img class="userImg" src="@imgSrc" />
+          }
+          <h4>@Html.DisplayFor(modelItem => item.FullName)</h4>
+          <p>@Html.DisplayFor(modelItem => item.PrimaryLocation)</p>
+          <form asp-action="Follow">
+              <input type="hidden" name="userid" asp-for="@item.Id">
+              <button class="ate">Follow</button>
+          </form>
+      </div>
   }
     }
   </div>

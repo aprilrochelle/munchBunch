@@ -11,25 +11,34 @@
       <h4 class="text-center">Follow some fellow Munchers! <a asp-action="Index">Click here.</a></h4>
     } else {
     @foreach (var item in @Model.UsersIFollow) {
-    <div class="userCard text-center col-md-4">
-       @{
-              var base64 = Convert.ToBase64String(@item.ReceivingUser.Image);
-              var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+      <div class="userCard text-center col-md-4">
+          @if (item.ReceivingUser.Image != null)
+          {
+             
+                  var base64 = Convert.ToBase64String(@item.ReceivingUser.Image);
+                  var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+             
+
+              <img class="userImg" src="@imgSrc" />
+
+          }
+          else 
+          {
+              <img class="userImg" src="~/images/medium-default-avatar.png" />
           }
 
-      <img class="userImg" src="@imgSrc" />
-      <h3>@Html.DisplayFor(modelItem => item.ReceivingUser.FullName)</h3>
-      <h5>@Html.DisplayFor(modelItem => item.ReceivingUser.PrimaryLocation)</h5>
-      <form asp-action="SeeMemoirs">
-        <input type="hidden" name="userid" asp-for="@item.ReceivingUser.Id">
-        <input type="hidden" name="user" asp-for="@item.ReceivingUser">
-        <button class="btn index-btn">See Memoirs</button>
-      </form>
-      <form asp-action="Unfollow">
-        <input type="hidden" name="userid" asp-for="@item.ReceivingUserId">
-        <button class="btn btn-default">Unfollow</button>
-      </form>
-    </div>
+          <h3>@Html.DisplayFor(modelItem => item.ReceivingUser.FullName)</h3>
+          <h5>@Html.DisplayFor(modelItem => item.ReceivingUser.PrimaryLocation)</h5>
+          <form asp-action="SeeMemoirs">
+              <input type="hidden" name="userid" asp-for="@item.ReceivingUser.Id">
+              <input type="hidden" name="user" asp-for="@item.ReceivingUser">
+              <button class="btn index-btn">See Memoirs</button>
+          </form>
+          <form asp-action="Unfollow">
+              <input type="hidden" name="userid" asp-for="@item.ReceivingUserId">
+              <button class="btn btn-default">Unfollow</button>
+          </form>
+      </div>
   }
     }
   </div>
