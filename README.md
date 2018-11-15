@@ -15,6 +15,12 @@ Using the Zomato API, users can search restaurants in their primary location and
 - CSS
 - Adobe Illustrator CC (for logo design)
 
+## Live Demo
+Check it out here: [MunchBunch](https://munchbunch2018.azurewebsites.net/)
+
+(After you register, search "april" or "nashville" to find & follow me!)
+
+
 ## Screenshots
 
 Login Screen
