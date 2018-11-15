@@ -55,7 +55,7 @@ namespace MunchBunch.Controllers
                 LockoutEnabled, AccessFailedCount, Discriminator, FirstName, LastName, PrimaryLocation, [Image]
             from AspNetUsers au
             left join UserFollow uf on au.Id = uf.ReceivingUserId
-            where not au.Id = '{usersId}' or
+            where not au.Id = '{usersId}' and
             not uf.RequestingUserId = '{usersId}'
             group by au.Id, au.FirstName, au.LastName, au.PrimaryLocation, au.UserName, au.NormalizedUserName, 
             au.Email, au.NormalizedEmail, au.EmailConfirmed, au.PasswordHash,
@@ -68,7 +68,7 @@ namespace MunchBunch.Controllers
       List<AppUser> usersToFollow = new List<AppUser>();
 
       foreach (var person in everyoneNotMe) {
-        if (person.FirstName.Contains(searchTerm) || person.LastName.Contains(searchTerm) || person.PrimaryLocation.Contains(searchTerm.ToUpper())) {
+        if (person.FirstName.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase) || person.LastName.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase) || person.PrimaryLocation.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase)) {
           usersToFollow.Add(person);
         }
       }
