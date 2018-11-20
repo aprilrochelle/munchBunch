@@ -54,14 +54,11 @@ namespace MunchBunch.Controllers
                 SecurityStamp, ConcurrencyStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, 
                 LockoutEnabled, AccessFailedCount, Discriminator, FirstName, LastName, PrimaryLocation, [Image]
             from AspNetUsers au
+            where not au.Id = '{usersId}'
+            and au.Id not in
+            (select au.Id from AspNetUsers au
             left join UserFollow uf on au.Id = uf.ReceivingUserId
-            where not au.Id = '{usersId}' and
-            not uf.RequestingUserId = '{usersId}'
-            group by au.Id, au.FirstName, au.LastName, au.PrimaryLocation, au.UserName, au.NormalizedUserName, 
-            au.Email, au.NormalizedEmail, au.EmailConfirmed, au.PasswordHash,
-                au.SecurityStamp, au.ConcurrencyStamp, au.PhoneNumber, au.PhoneNumberConfirmed, 
-                au.TwoFactorEnabled, au.LockoutEnd, 
-                au.LockoutEnabled, au.AccessFailedCount, au.Discriminator, au.[Image]";
+            where uf.RequestingUserId = '{usersId}')";
 
       var everyoneNotMe = _context.AppUser.FromSql(sql1).ToList();
 
