@@ -50,9 +50,7 @@ namespace MunchBunch.Controllers
       var usersId = currUser.Id;
 
       string sql1 = $@"
-            select Id, UserName, NormalizedUserName, Email, NormalizedEmail, EmailConfirmed, PasswordHash,
-                SecurityStamp, ConcurrencyStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, 
-                LockoutEnabled, AccessFailedCount, Discriminator, FirstName, LastName, PrimaryLocation, [Image]
+            select *
             from AspNetUsers au
             where not au.Id = '{usersId}'
             and au.Id not in
