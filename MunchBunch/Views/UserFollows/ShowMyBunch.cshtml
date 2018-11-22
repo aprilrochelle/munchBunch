@@ -29,12 +29,12 @@
 
           <h3>@Html.DisplayFor(modelItem => item.ReceivingUser.FullName)</h3>
           <h5>@Html.DisplayFor(modelItem => item.ReceivingUser.PrimaryLocation)</h5>
-          <form asp-action="SeeMemoirs">
+          <form class="hiddenForm" asp-action="SeeMemoirs">
               <input type="hidden" name="userid" asp-for="@item.ReceivingUser.Id">
               <input type="hidden" name="user" asp-for="@item.ReceivingUser">
               <button class="btn index-btn">See Memoirs</button>
           </form>
-          <form asp-action="Unfollow">
+          <form class="hiddenForm" asp-action="Unfollow">
               <input type="hidden" name="userid" asp-for="@item.ReceivingUserId">
               <button class="btn btn-default">Unfollow</button>
           </form>
