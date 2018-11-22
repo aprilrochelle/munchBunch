@@ -49,15 +49,20 @@ h1, h2 {
   height: 120px;
 }
 
+
+.hiddenForm {
+  margin: 0 5px;
+  display: inline-block;
+}
+
 /*-------------------------------*/
 /*            Index              */
 /*-------------------------------*/
-
 #results,
 #below,
 .muncher-results {
-  overflow: scroll;
-  height: 65vh;
+    overflow: scroll;
+    height: 65vh;
 }
 
 #searchQuery,

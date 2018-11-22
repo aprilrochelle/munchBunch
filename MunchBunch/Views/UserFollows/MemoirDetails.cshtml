@@ -66,11 +66,18 @@
             @Html.DisplayFor(model => model.FeaturedMemoir.AppUser.FullName)
           </p>
         </div>
-  <div class="text-center">
-    <form asp-action="SeeMemoirs">
-        <input type="hidden" name="userid" asp-for="@Model.FeaturedMemoir.AppUserId">
-        <input type="hidden" name="user" asp-for="@Model.FeaturedMemoir.AppUser">
-        <button class="btn index-btn">Go Back</button>
-      </form>
-  </div>
+        <div class="text-center">
+            <form class="hiddenForm" asp-action="SeeMemoirs">
+                <input type="hidden" name="userid" asp-for="@Model.FeaturedMemoir.AppUserId">
+                <input type="hidden" name="user" asp-for="@Model.FeaturedMemoir.AppUser">
+                <button class="btn index-btn">Go Back</button>
+            </form>
+            <form class="hiddenForm" asp-controller="Wishlists" asp-action="Create" method="post">
+                <input type="hidden" name="restaurantName" asp-for="@Model.FeaturedMemoir.RestaurantName">
+                <input type="hidden" name="rid" asp-for="@Model.FeaturedMemoir.RId">
+                <input type="hidden" name="restaurantLocation" asp-for="@Model.FeaturedMemoir.RestaurantLocation">
+                <input type="hidden" name="restaurantAddress" asp-for="@Model.FeaturedMemoir.RestaurantAddress">
+                <button class="btn index-btn">Add to My Wishlist</button>
+            </form>
+        </div>
     </div>
