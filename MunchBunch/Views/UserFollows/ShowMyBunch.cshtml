@@ -6,10 +6,12 @@
 <div>
   <img class="Index" />
   <h2 class="search-header text-center">My MunchBunch</h2>
-  <div class="row muncher-results">
+  <div class="row">
+      <div class="col-md-9 muncher-results">
     @if((Model.UsersIFollow).Count() == 0) {
       <h4 class="text-center">Follow some fellow Munchers! <a asp-action="Index">Click here.</a></h4>
     } else {
+    <h4 class="text-center">Munchers I Follow (@Model.UsersIFollow.Count):</h4>
     @foreach (var item in @Model.UsersIFollow) {
       <div class="userCard text-center col-md-4">
           @if (item.ReceivingUser.Image != null)
@@ -42,4 +44,9 @@
   }
     }
   </div>
+  <div class="col-md-3">
+      <h4 class="text-center">Munchers Following Me:</h4>
+  </div>
+  </div>
+  
 </div>

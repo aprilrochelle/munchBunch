@@ -61,8 +61,8 @@ h1, h2 {
 #results,
 #below,
 .muncher-results {
-    overflow: scroll;
-    height: 65vh;
+    overflow-y: scroll;
+    height: 80vh;
 }
 
 #searchQuery,
