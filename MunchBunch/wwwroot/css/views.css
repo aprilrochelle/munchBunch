@@ -49,10 +49,15 @@ h1, h2 {
   height: 120px;
 }
 
+.follwerImg {
+    height: 85px;
+    border-radius: 50%;
+}
+
 
 .hiddenForm {
-  margin: 0 5px;
-  display: inline-block;
+    margin: 0 5px;
+    display: inline-block;
 }
 
 /*-------------------------------*/
@@ -61,8 +66,8 @@ h1, h2 {
 #results,
 #below,
 .muncher-results {
-    overflow: scroll;
-    height: 65vh;
+    overflow-y: scroll;
+    height: 80vh;
 }
 
 #searchQuery,
@@ -97,7 +102,7 @@ h1, h2 {
     height: 200px;
     padding: 8px;
     display: inline-block;
-    margin: 25px 2.5%;
+    margin: 25px 2%;
     vertical-align: top;
     text-align: center;
     background-color: rgba(255, 255, 255, .8);
@@ -112,6 +117,13 @@ h1, h2 {
     margin: 25px auto;
     vertical-align: top;
     text-align: center;
+}
+
+.followerCard {
+    height: 150px;
+    padding: 8px;
+    margin: 10px auto;
+    text-align:center;
 }
 
 .restName {

@@ -4,42 +4,83 @@
     ViewData["Title"] = "The Bunch";
 }
 <div>
-  <img class="Index" />
-  <h2 class="search-header text-center">My MunchBunch</h2>
-  <div class="row muncher-results">
-    @if((Model.UsersIFollow).Count() == 0) {
-      <h4 class="text-center">Follow some fellow Munchers! <a asp-action="Index">Click here.</a></h4>
-    } else {
-    @foreach (var item in @Model.UsersIFollow) {
-      <div class="userCard text-center col-md-4">
-          @if (item.ReceivingUser.Image != null)
-          {
-             
-                  var base64 = Convert.ToBase64String(@item.ReceivingUser.Image);
-                  var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-             
+    <img class="Index" />
+    <h2 class="search-header text-center">My MunchBunch</h2>
+    <div class="row">
+        <div class="col-md-9 muncher-results">
+            @if ((Model.UsersIFollow).Count() == 0)
+            {
+                <h4 class="text-center">Follow some fellow Munchers! <a asp-action="Index">Click here.</a></h4>
+            }
+            else
+            {
+                <h4 class="text-center">Munchers I Follow (@Model.UsersIFollow.Count)</h4>
+                @foreach (var item in @Model.UsersIFollow)
+                {
+                    <div class="userCard text-center col-md-4">
+                        @if (item.ReceivingUser.Image != null)
+                        {
 
-              <img class="userImg" src="@imgSrc" />
+                            var base64 = Convert.ToBase64String(@item.ReceivingUser.Image);
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
-          }
-          else 
-          {
-              <img class="userImg" src="~/images/medium-default-avatar.png" />
-          }
 
-          <h3>@Html.DisplayFor(modelItem => item.ReceivingUser.FullName)</h3>
-          <h5>@Html.DisplayFor(modelItem => item.ReceivingUser.PrimaryLocation)</h5>
-          <form class="hiddenForm" asp-action="SeeMemoirs">
-              <input type="hidden" name="userid" asp-for="@item.ReceivingUser.Id">
-              <input type="hidden" name="user" asp-for="@item.ReceivingUser">
-              <button class="btn index-btn">See Memoirs</button>
-          </form>
-          <form class="hiddenForm" asp-action="Unfollow">
-              <input type="hidden" name="userid" asp-for="@item.ReceivingUserId">
-              <button class="btn btn-default">Unfollow</button>
-          </form>
-      </div>
-  }
-    }
-  </div>
-</div>
+                            <img class="userImg" src="@imgSrc" />
+
+                        }
+                        else
+                        {
+                            <img class="userImg" src="~/images/medium-default-avatar.png" />
+                        }
+
+                        <h3>@Html.DisplayFor(modelItem => item.ReceivingUser.FullName)</h3>
+                        <h5>@Html.DisplayFor(modelItem => item.ReceivingUser.PrimaryLocation)</h5>
+                        <form class="hiddenForm" asp-action="SeeMemoirs">
+                            <input type="hidden" name="userid" asp-for="@item.ReceivingUser.Id">
+                            <input type="hidden" name="user" asp-for="@item.ReceivingUser">
+                            <button class="btn index-btn">See Memoirs</button>
+                        </form>
+                        <form class="hiddenForm" asp-action="Unfollow">
+                            <input type="hidden" name="userid" asp-for="@item.ReceivingUserId">
+                            <button class="btn btn-default">Unfollow</button>
+                        </form>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-3 muncher-results">
+            @if (Model.UsersFollowingMe.Count == 0)
+            {
+                <h4 class="text-center">Munchers Following Me (0)</h4>
+            }
+            else
+            {
+                <h4 class="text-center">Munchers Following Me (@Model.UsersFollowingMe.Count) </h4>
+                @foreach (var item in @Model.UsersFollowingMe)
+                {
+                    <div class="followerCard text-center col-md-6">
+                        @if (item.RequestingUser.Image != null)
+                        {
+
+                            var base64 = Convert.ToBase64String(@item.RequestingUser.Image);
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+
+                            <img class="follwerImg" src="@imgSrc" />
+
+                        }
+                        else
+                        {
+                            <img class="follwerImg" src="~/images/medium-default-avatar.png" />
+                        }
+
+                        <h5>@Html.DisplayFor(modelItem => item.RequestingUser.FullName)</h5>
+                        <h6>@Html.DisplayFor(modelItem => item.RequestingUser.PrimaryLocation)</h6>
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+ </div>
+

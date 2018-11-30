@@ -119,10 +119,16 @@ namespace MunchBunch.Controllers
       .Include(u => u.RequestingUser)
       .Where(u => u.RequestingUserId == usersId).ToList();
 
-      UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel()
+      var myFollowers = _context.UserFollow
+        .Include(u => u.ReceivingUser)
+        .Include(u => u.RequestingUser)
+        .Where(u => u.ReceivingUserId == usersId).ToList();
+
+            UserFollowsViewModel userFollowsViewModel = new UserFollowsViewModel()
       {
         User = currUser,
-        UsersIFollow = myBunch
+        UsersIFollow = myBunch,
+        UsersFollowingMe = myFollowers
       };
 
       return View(userFollowsViewModel);
